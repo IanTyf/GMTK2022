@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class roll : MonoBehaviour
 {
+    public enum Mode
+    {
+        Idle, MakeSound, Dead
+    }
+
+
     public Transform camTransform;
     private cameraMovement camMovement;
     private Rigidbody rb;
@@ -12,7 +18,7 @@ public class roll : MonoBehaviour
     public float rollCD;
     private float rollTimer;
 
-    
+    public Mode playerMode;
 
     public bool moving;
 
@@ -22,11 +28,14 @@ public class roll : MonoBehaviour
         camMovement = camTransform.gameObject.GetComponent<cameraMovement>();
         rb = GetComponent<Rigidbody>();
         rollTimer = 0f;
+        playerMode = Mode.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerMode == Mode.Dead) return;
+
         // sync camera position
         camTransform.position = transform.position;
 

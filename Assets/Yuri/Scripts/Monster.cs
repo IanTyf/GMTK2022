@@ -51,18 +51,18 @@ public class Monster : MonoBehaviour
     void FixedUpdate()
     {
         //check if player died
-        if (!(player.GetComponent<playerControllerYuri_test>().mode == playerControllerYuri_test.Mode.Die))
+        if (!(player.GetComponent<roll>().playerMode == roll.Mode.Dead))
         {
             // player alive
             if (Dist_player_Monster() < KillDist)
             {
                 //kill player
-                player.GetComponent<playerControllerYuri_test>().mode = playerControllerYuri_test.Mode.Die;
+                player.GetComponent<roll>().playerMode = roll.Mode.Dead;
             }
             else
             {
                 //player move
-                if (player.GetComponent<playerControllerYuri_test>().mode == playerControllerYuri_test.Mode.Walking
+                if (player.GetComponent<roll>().playerMode == roll.Mode.MakeSound
                     || CastRayDetect())
                 {
                     Attentioned = true;
