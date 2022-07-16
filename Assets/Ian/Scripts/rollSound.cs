@@ -7,7 +7,7 @@ public class rollSound : MonoBehaviour
     public AudioClip clip;
     private AudioSource audioSource;
 
-    private float cd = 0.5f;
+    private float cd = 0.8f;
     private float timer = 0f;
 
     // Start is called before the first frame update

@@ -16,11 +16,18 @@ public class rollSoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.parent.GetComponent<roll>().playerMode == roll.Mode.Dead) return;
+
         if (rollVolumeLevel > 0)    rollVolumeLevel -= Time.deltaTime * 1.2f;
 
         if (rollVolumeLevel > tooLoudThreshold)
         {
             Debug.Log("TOO LOUD");
+            transform.parent.GetComponent<roll>().playerMode = roll.Mode.MakeSound;
+        }
+        else
+        {
+            transform.parent.GetComponent<roll>().playerMode = roll.Mode.Idle;
         }
     }
 
