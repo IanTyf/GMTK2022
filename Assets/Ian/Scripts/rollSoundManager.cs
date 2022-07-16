@@ -16,7 +16,7 @@ public class rollSoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rollVolumeLevel > 0)    rollVolumeLevel -= Time.deltaTime;
+        if (rollVolumeLevel > 0)    rollVolumeLevel -= Time.deltaTime * 1.2f;
 
         if (rollVolumeLevel > tooLoudThreshold)
         {
