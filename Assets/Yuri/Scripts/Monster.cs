@@ -27,6 +27,8 @@ public class Monster : MonoBehaviour
             moveToPlayer();
             CastRay();
         }
+        
+        
     }
 
     void CastRay()
