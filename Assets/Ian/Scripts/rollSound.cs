@@ -28,8 +28,11 @@ public class rollSound : MonoBehaviour
     {
         if (other.tag == "Player") return;
         if (timer < cd) return;
-        audioSource.PlayOneShot(clip);
+        rollSoundManager rsm = transform.parent.GetComponent<rollSoundManager>();
+        float volume = rsm.rollVolumeLevel / 2 + 0.3f;
+        if (rsm.rollVolumeLevel > rsm.tooLoudThreshold) volume = 1;
+        audioSource.PlayOneShot(clip, volume);
         timer = 0f;
-        transform.parent.GetComponent<rollSoundManager>().addVolume();
+        rsm.addVolume();
     }
 }

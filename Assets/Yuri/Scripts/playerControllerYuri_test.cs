@@ -17,10 +17,11 @@ public class playerControllerYuri_test : MonoBehaviour
     // Start is called before the first frame update
     public enum Mode
     {
-        Walking,Idle
+        Walking,Idle,Die
     }
     public Mode mode = Mode.Idle;
-    
+
+    public float dieDist;
     void Start()
     {
     }
@@ -31,30 +32,23 @@ public class playerControllerYuri_test : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
 
-        if (horizontalInput == 0 && forwardInput == 0)
+        //check if the player die
+        if (! (mode == Mode.Die))
         {
-            //Idle
-            if (gameObject.GetComponent<Tags>().HasTag("Walking"))
+            //check if the player is walking
+            if (horizontalInput == 0 && forwardInput == 0)
             {
-                gameObject.GetComponent<Tags>().RemoveTag("Walking");
-            }
-
-            mode = Mode.Idle;
-        }
-        else
-        {
-            //walking
-            if (gameObject.GetComponent<Tags>().HasTag("Walking"))
-            {
-                
+                //Idle
+                mode = Mode.Idle;
             }
             else
             {
-                gameObject.GetComponent<Tags>().AddTag("Walking");
+                //walking
+                mode = Mode.Walking;
             }
-            mode = Mode.Walking;
         }
-        //Debug.Log(horizontalInput+" "+forwardInput);
+
+        Debug.Log(horizontalInput+" "+forwardInput);
         Debug.Log("mode:"+mode);
         
         // Move the vehicle forward
