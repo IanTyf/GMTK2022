@@ -8,10 +8,6 @@ public class GlitchEffect : MonoBehaviour
 
     public float glitchStrength;
 
-
-    public float frequency;
-    private float frequencyTimer;
-
     private float increase;
     private int direction;
 
@@ -46,15 +42,8 @@ public class GlitchEffect : MonoBehaviour
 
         float s = 1 / Mathf.Pow((1 + Mathf.Exp(-30 * (glitchStrength - 0.5f))), 0.3f);
 
-        frequencyTimer += Time.deltaTime;
-        if (frequencyTimer > frequency)
-        {
-            frequencyTimer = 0f;
-            frequency *= 0.9f;
-            if (frequency < Time.deltaTime) frequency = Time.deltaTime;
-            
-        }
-            mat.SetFloat("_Strength", 0.1f * s * Random.Range(-1.5f, 1.5f));
-            posneg *= -1;
+        
+        mat.SetFloat("_Strength", 0.1f * s * Random.Range(-1.1f, 1.1f));
+        posneg *= -1;
     }
 }
