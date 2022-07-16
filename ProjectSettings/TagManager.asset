@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cover
   - unCover
+  - Floor
   layers:
   - Default
   - TransparentFX
