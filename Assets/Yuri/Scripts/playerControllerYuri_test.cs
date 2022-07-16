@@ -20,11 +20,9 @@ public class playerControllerYuri_test : MonoBehaviour
         Walking,Idle
     }
     public Mode mode = Mode.Idle;
+    
     void Start()
     {
-
-        
-        
     }
 
     // Update is called once per frame
@@ -35,10 +33,25 @@ public class playerControllerYuri_test : MonoBehaviour
 
         if (horizontalInput == 0 && forwardInput == 0)
         {
+            //Idle
+            if (gameObject.GetComponent<Tags>().HasTag("Walking"))
+            {
+                gameObject.GetComponent<Tags>().RemoveTag("Walking");
+            }
+
             mode = Mode.Idle;
         }
         else
         {
+            //walking
+            if (gameObject.GetComponent<Tags>().HasTag("Walking"))
+            {
+                
+            }
+            else
+            {
+                gameObject.GetComponent<Tags>().AddTag("Walking");
+            }
             mode = Mode.Walking;
         }
         //Debug.Log(horizontalInput+" "+forwardInput);
