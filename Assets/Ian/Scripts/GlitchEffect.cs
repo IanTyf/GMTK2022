@@ -8,7 +8,7 @@ public class GlitchEffect : MonoBehaviour
 
     public float glitchStrength;
 
-    private float increase;
+    //private float increase;
     private int direction;
 
     private int posneg;
@@ -17,7 +17,7 @@ public class GlitchEffect : MonoBehaviour
     void Start()
     {
         glitchStrength = 0.0f;
-        increase = 0;
+        //increase = 0;
         direction = 0;
         posneg = 1;
     }
