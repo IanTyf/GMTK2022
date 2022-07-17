@@ -92,6 +92,7 @@ public class EffectsController : MonoBehaviour
 
 
         // fog
+        /*
         #region fog
         if (chaseStartDist == -1)
         {
@@ -117,7 +118,7 @@ public class EffectsController : MonoBehaviour
             }
         }
         #endregion
-
+    */
 
         // glitch effect
         #region glitch effect

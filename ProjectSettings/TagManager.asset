@@ -8,6 +8,7 @@ TagManager:
   - unCover
   - Floor
   - PlayerTrigger
+  - standable
   layers:
   - Default
   - TransparentFX

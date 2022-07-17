@@ -10,6 +10,8 @@ public class ItemDrop : MonoBehaviour
 
     public bool dropped;
 
+    public GameObject rollSoundStuff;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +38,11 @@ public class ItemDrop : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.CompareTag("Floor")) 
+        if (collision.collider.gameObject.name.Equals("Floor")) 
         {
             dropSound();
+            rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
+
         }
     }
 }

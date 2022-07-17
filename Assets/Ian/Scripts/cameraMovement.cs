@@ -15,8 +15,8 @@ public class cameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xRot = 0f;
-        yRot = 0f;
+        xRot = transform.eulerAngles.x;
+        yRot = transform.eulerAngles.y;
     }
 
     // Update is called once per frame

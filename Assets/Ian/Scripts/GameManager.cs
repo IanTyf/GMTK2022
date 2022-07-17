@@ -20,7 +20,30 @@ public class GameManager : MonoBehaviour
     private bool glitch;
     private float glitchVal;
     private GameObject efs;
-    
+
+    public GameObject[] brokenDice;
+    public GameObject normalDice;
+
+    public GameObject[] spawnPoints;
+    public GameObject[] brokenSpawnPoints;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        for (int i=0; i<spawnPoints.Length; i++)
+        {
+            if (i<StaticManager.deathCount)
+            {
+                Instantiate(brokenDice[i], brokenSpawnPoints[i].transform.position, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(normalDice, spawnPoints[i].transform.position, Quaternion.identity);
+            }
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +59,7 @@ public class GameManager : MonoBehaviour
             glitchVal += Time.deltaTime * 0.15f;
             glitchEffect.glitchStrength = glitchVal;
         }
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             dieInstantly();
@@ -45,6 +68,7 @@ public class GameManager : MonoBehaviour
         {
             DieSlowly();
         }
+        */
     }
 
     // biss
@@ -95,6 +119,17 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (StaticManager.deathCount < 5)
+        {
+            StaticManager.deathCount++;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            // all dead, no more lives
+
+            StaticManager.deathCount = 0;
+            // go to fourth scene
+        }
     }
 }

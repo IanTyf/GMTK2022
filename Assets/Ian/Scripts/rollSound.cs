@@ -32,6 +32,10 @@ public class rollSound : MonoBehaviour
         float volume = rsm.rollVolumeLevel / 2 + 0.3f;
         if (rsm.rollVolumeLevel > rsm.tooLoudThreshold) volume = 1;
         audioSource.PlayOneShot(clip, volume);
+        //audioSource.volume = volume;
+        //audioSource.clip = clip;
+        //audioSource.Play();
+        Debug.Log(other.name);
         timer = 0f;
         rsm.addVolume();
     }

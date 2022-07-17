@@ -12,6 +12,8 @@ public class DollCollision : MonoBehaviour
     private bool playing;
     private Animator animator;
 
+    public GameObject rollSoundStuff;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,7 @@ public class DollCollision : MonoBehaviour
             EyeBallNormal();
         }
 
+        
         
     }
 
@@ -54,6 +57,8 @@ public class DollCollision : MonoBehaviour
             {
                 audioSource.Play();
                 EyeballLight();
+                rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
+
 
                 // doll eye change color
                 playing = true;
