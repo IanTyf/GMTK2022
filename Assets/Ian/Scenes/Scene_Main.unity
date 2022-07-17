@@ -6744,6 +6744,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 571f9da1738110545b3a8b8ed7ad989c, type: 2}
+    - target: {fileID: 7183286180815059322, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7183286180815059323, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_Volume
       value: 0.055
@@ -6751,6 +6755,10 @@ PrefabInstance:
     - target: {fileID: 7183286180815059325, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_TagString
       value: PlayerTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183286180822771394, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7183286180822771395, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_Volume
@@ -6764,6 +6772,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.055
       objectReference: {fileID: 0}
+    - target: {fileID: 7183286181124197811, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7183286181124197818, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_TagString
       value: PlayerTrigger
@@ -6771,6 +6783,10 @@ PrefabInstance:
     - target: {fileID: 7183286181390360814, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: tooLoudThreshold
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183286181508935000, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7183286181508935001, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: camTransform
@@ -6836,6 +6852,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 7183286182224598977, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7183286182224598982, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_Volume
       value: 0.055
@@ -6848,6 +6868,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.055
       objectReference: {fileID: 0}
+    - target: {fileID: 7183286182355211655, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7183286182355211662, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_TagString
       value: PlayerTrigger
@@ -6855,6 +6879,10 @@ PrefabInstance:
     - target: {fileID: 7183286182379802068, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_Volume
       value: 0.055
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183286182379802071, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7183286182379802078, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: m_TagString

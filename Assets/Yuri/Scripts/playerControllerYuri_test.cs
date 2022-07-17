@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.SceneManagement;
+//using UnityEditor.Experimental.SceneManagement;
 using UnityEngine;
 
 public class playerControllerYuri_test : MonoBehaviour
