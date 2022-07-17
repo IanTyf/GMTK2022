@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PreGameUI : MonoBehaviour
 {
@@ -33,5 +34,10 @@ public class PreGameUI : MonoBehaviour
     public void InsIn() 
     {
         Animator.SetBool("Ins", true);
+    }
+
+    public void StartSceneLoad() 
+    {
+        SceneManager.LoadScene("Scene_Start");
     }
 }

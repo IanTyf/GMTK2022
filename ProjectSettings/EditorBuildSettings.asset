@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Danny/scenes/Scene_Warning.unity
+    guid: 08e98f521db57574aa9d80cfce476010
+  - enabled: 1
+    path: Assets/Danny/scenes/Scene_Start.unity
+    guid: 3f6a584052674e84ba7ee79f5419143f
   m_configObjects: {}
