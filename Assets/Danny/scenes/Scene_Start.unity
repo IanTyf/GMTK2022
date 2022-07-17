@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 391, y: -393}
+  m_AnchoredPosition: {x: 455.00006, y: -444}
   m_SizeDelta: {x: 277.2, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92021066
@@ -548,7 +548,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a9cd188d9625f5c4dba5be89e3bb4475, type: 3}
+    m_Font: {fileID: 12800000, guid: 26f616f5964bf7e41a8579aaa293f714, type: 3}
     m_FontSize: 45
     m_FontStyle: 1
     m_BestFit: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xB7 Start"
+  m_Text: "\xB7 Play"
 --- !u!222 &765302326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -603,7 +603,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 764, y: -186}
+  m_AnchoredPosition: {x: 812, y: -238}
   m_SizeDelta: {x: 761.3, y: 269.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273368452
@@ -627,19 +627,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a9cd188d9625f5c4dba5be89e3bb4475, type: 3}
-    m_FontSize: 64
+    m_Font: {fileID: 12800000, guid: 26f616f5964bf7e41a8579aaa293f714, type: 3}
+    m_FontSize: 121
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 120
+    m_MaxSize: 121
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Rolling in the Dream
+  m_Text: TOZZI
 --- !u!222 &1273368453
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -684,7 +684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 391, y: -525}
+  m_AnchoredPosition: {x: 455.00006, y: -565}
   m_SizeDelta: {x: 277.2, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350243007
@@ -980,7 +980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 240.79999, y: -183.20001}
+  m_AnchoredPosition: {x: 287.8, y: -234.20004}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1930913873
@@ -1216,7 +1216,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a9cd188d9625f5c4dba5be89e3bb4475, type: 3}
+    m_Font: {fileID: 12800000, guid: 26f616f5964bf7e41a8579aaa293f714, type: 3}
     m_FontSize: 45
     m_FontStyle: 1
     m_BestFit: 0
@@ -1228,7 +1228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xB7 Quit\n"
+  m_Text: "\xB7 Exit"
 --- !u!222 &2065516578
 CanvasRenderer:
   m_ObjectHideFlags: 0

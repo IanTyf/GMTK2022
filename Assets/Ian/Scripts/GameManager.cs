@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] spawnPoints;
     public GameObject[] brokenSpawnPoints;
 
+    public AudioSource ambient;
+
+    public ExitRoom er;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -48,7 +52,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ambient = GameObject.Find("AmbientSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -132,5 +136,27 @@ public class GameManager : MonoBehaviour
             // go to fourth scene
             SceneManager.LoadScene("Scene_Lost");
         }
+    }
+
+    public void blackInFive()
+    {
+        Invoke("blackScreenAndGoToMainMenu", 5f);
+    }
+
+    public void blackScreenAndGoToMainMenu()
+    {
+        er.increaseAmbient = false;
+        ambient.volume = 0f;
+        glitchEffect.glitchStrength = 0f;
+        heartBeat.volume = 0f;
+        overlay.GetComponent<Animator>().SetTrigger("black");
+        //overlay.GetComponent<Image>().color = Color.black;
+
+        Invoke("goToMainScene", 5f);
+    }
+
+    private void goToMainScene()
+    {
+        SceneManager.LoadScene("Scene_Start");
     }
 }
