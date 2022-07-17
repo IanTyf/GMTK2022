@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
@@ -9,10 +10,16 @@ public class Monster : MonoBehaviour
     [SerializeField]
     private float monsterSpeed;
 
+    [SerializeField]
     private float KillDist =3;
+    
 
-    private Vector3 initPos;
+    public enum Mode
+    {
+        Partrol,InAttention,Chase,InReseting
+    }
 
+    public Mode mode_Monster;
     #region Reset
     private float resetTime = 3;
     [SerializeField]
@@ -36,33 +43,188 @@ public class Monster : MonoBehaviour
     public bool inAttention =false;
     #endregion
 
+    public LayerMask coverDetect;
     void Start()
     {
-        initPos = this.transform.position;
         reset_Timer = resetTime;
         attention_Timer = attentionTime;
 
         setNewPoint();
         curIndex = (int)Random.Range(0, navPoints.Count);
         curPoint = navPoints[curIndex];
+        
+        mode_Monster =  Mode.Partrol;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //check if player died
-        if (!(player.GetComponent<playerControllerYuri_test>().mode == playerControllerYuri_test.Mode.Die))
+        if (CastRayDetect())
+        {
+            
+        }
+        //Update monster_mode
+        //check make sound
+        if (player.GetComponent<roll>().playerMode == roll.Mode.MakeSound&&mode_Monster==Mode.Partrol)
+        {
+            mode_Monster = Mode.InAttention;
+        }
+        
+
+        #region check inAttention
+
+        if (mode_Monster == Mode.InAttention)
+        {
+            
+        }
+        #endregion
+
+        #region Chase
+
+        if (mode_Monster == Mode.Chase)
+        {
+            
+            
+        }
+
+
+        #endregion
+        
+        #region inReseting
+
+        if (mode_Monster == Mode.InReseting)
+        {
+            
+        }
+
+
+        #endregion
+
+        #region Patoral
+
+        if (mode_Monster == Mode.Partrol)
+        {
+            
+        }
+        #endregion
+        switch (mode_Monster)
+        {
+            case Mode.InAttention:
+                Debug.Log("InAttention");
+                //check if kill player
+                if (Dist_player_Monster() < KillDist)
+                {
+                    //kill player
+                    player.GetComponent<roll>().playerMode = roll.Mode.Dead;
+                }
+                else
+                {
+                    //start attention timer
+                    if (attention_Timer > 0)
+                    {
+                        attention_Timer -= Time.deltaTime;
+                        //check chase or not
+                        if (player.GetComponent<roll>().moving
+                            || CastRayDetect())
+                        {
+                            //update to chase mode
+                            mode_Monster = Mode.InAttention;
+                        }
+                        else
+                        {
+                            //mode_Monster = Mode.InAttention;
+                        }
+                    }
+                    else
+                    {
+                        if (player.GetComponent<roll>().moving
+                            || CastRayDetect())
+                        {
+                            //update to chase mode
+                            mode_Monster = Mode.Chase;
+                        }
+                        else
+                        {
+                            mode_Monster = Mode.Partrol;
+                        }
+                        
+                    }
+                
+                }
+                break;
+            case Mode.Chase:
+                Debug.Log("chasing");
+                if (player.GetComponent<roll>().moving
+                    || CastRayDetect())
+                {
+                    //chase
+                    if (Dist_player_Monster() < KillDist)
+                    {
+                        //kill player
+                        player.GetComponent<roll>().playerMode = roll.Mode.Dead;
+                    }
+                    else
+                    {
+                        //在追 还没死
+                        mode_Monster = Mode.Chase;
+                        moveToPlayer();
+                        reset_Timer = resetTime;
+                    }
+
+                }
+                else
+                {
+                    mode_Monster = Mode.InReseting;
+                }
+                break;
+            case Mode.InReseting:
+                Debug.Log("inReseting");
+                if (reset_Timer > 0 )
+                {
+                    //counting the timer checking the player
+                    reset_Timer -= Time.deltaTime;
+                }
+                else
+                {
+                    if (player.GetComponent<roll>().moving
+                        || CastRayDetect())
+                    {
+                        mode_Monster = Mode.Chase;
+                    }
+                    else
+                    {
+                        mode_Monster = Mode.Partrol;
+
+                    }
+                }
+                break;
+            case Mode.Partrol:
+                Debug.Log("Partol");
+                //reset to patral
+                Patral();
+                reset_Timer = resetTime;
+                attention_Timer = attentionTime;
+                break;
+        }
+        
+        
+        /*#region old
+
+        
+
+        
+        if (!(player.GetComponent<roll>().playerMode == roll.Mode.Dead))
         {
             // player alive
             if (Dist_player_Monster() < KillDist)
             {
                 //kill player
-                player.GetComponent<playerControllerYuri_test>().mode = playerControllerYuri_test.Mode.Die;
+                player.GetComponent<roll>().playerMode = roll.Mode.Dead;
             }
             else
             {
                 //player move
-                if (player.GetComponent<playerControllerYuri_test>().mode == playerControllerYuri_test.Mode.Walking
+                if (player.GetComponent<roll>().playerMode == roll.Mode.MakeSound
                     || CastRayDetect())
                 {
                     Attentioned = true;
@@ -124,26 +286,27 @@ public class Monster : MonoBehaviour
         {
             // player Die
         }
+        #endregion*/
     }
 
     public bool CastRayDetect()
     {
         RaycastHit hit;
         //walking
-        if (Physics.Raycast(transform.position, player.transform.position-transform.position,out hit))
+        if (Physics.Raycast(transform.position, player.transform.position-transform.position,out hit,Mathf.Infinity,coverDetect))
         {
              //Debug.Log(hit.transform.name);
              //Debug.Log(Vector3.Distance(transform.position,player.transform.position));
             if (hit.transform.tag == "unCover")
             {
                 Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.red);
-                Debug.Log("moving");
+                //Debug.Log("moving");
                 return true;
             }
             else
             {
                 Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.green);
-                Debug.Log("stop");
+                //Debug.Log("stop");
                 return false;
             }
         }
@@ -160,6 +323,7 @@ public class Monster : MonoBehaviour
 
     float Dist_player_Monster()
     {
+        
         return Vector3.Distance(transform.position, player.transform.position);
     }
 
