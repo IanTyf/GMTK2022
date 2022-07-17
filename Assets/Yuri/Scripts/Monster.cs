@@ -12,6 +12,8 @@ public class Monster : MonoBehaviour
 
     [SerializeField]
     public float KillDist =3;
+
+    public GameManager gm;
     
 
     public enum Mode
@@ -162,6 +164,7 @@ public class Monster : MonoBehaviour
                     {
                         //kill player
                         player.GetComponent<roll>().playerMode = roll.Mode.Dead;
+                        gm.DieSlowly();
                     }
                     else
                     {
@@ -318,7 +321,7 @@ public class Monster : MonoBehaviour
     }
     void moveToPlayer()
     {
-        transform.Translate((player.transform.position-transform.position)*Time.deltaTime*monsterSpeed);
+        transform.Translate((player.transform.position-transform.position).normalized*Time.deltaTime*monsterSpeed);
     }
 
     public float Dist_player_Monster()
@@ -335,7 +338,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            transform.Translate((curPoint.transform.position-transform.position)*Time.deltaTime*monsterSpeed);
+            transform.Translate((curPoint.transform.position-transform.position).normalized*Time.deltaTime*monsterSpeed);
         }
 
     }

@@ -16,6 +16,7 @@ public class PlayerDropSound : MonoBehaviour
     public AudioClip carpetRollSound;
 
     public GameObject rollSoundStuff;
+    public GameManager gm;
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +64,7 @@ public class PlayerDropSound : MonoBehaviour
             {
                 audioSource.PlayOneShot(woodDropFromHigh);
                 // biss
-
+                gm.dieInstantly();
             }
         }
         else if (oldName.Equals("Counter"))
@@ -72,7 +73,7 @@ public class PlayerDropSound : MonoBehaviour
             {
                 audioSource.PlayOneShot(woodDropFromLow);
                 // attention
-
+                rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
             }
         }
         else if (oldName.Equals("Bed"))
@@ -81,7 +82,7 @@ public class PlayerDropSound : MonoBehaviour
             {
                 audioSource.PlayOneShot(woodDropFromLow);
                 // attention
-
+                rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
             }
         }
     }

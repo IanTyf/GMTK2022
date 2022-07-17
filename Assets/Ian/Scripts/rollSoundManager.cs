@@ -14,7 +14,7 @@ public class rollSoundManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (transform.parent.GetComponent<roll>().playerMode == roll.Mode.Dead) return;
 

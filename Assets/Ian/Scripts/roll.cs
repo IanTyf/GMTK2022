@@ -22,6 +22,8 @@ public class roll : MonoBehaviour
 
     public bool moving;
 
+    public bool canMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class roll : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rollTimer = 0f;
         playerMode = Mode.Idle;
+
+        canMove = true;
     }
 
     // Update is called once per frame
@@ -39,6 +43,8 @@ public class roll : MonoBehaviour
         // sync camera position
         camTransform.position = transform.position;
 
+        if (!canMove) return;
+ 
         // can roll
         if (rollTimer == 0f)
         {
