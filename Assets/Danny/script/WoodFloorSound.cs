@@ -22,23 +22,25 @@ public class WoodFloorSound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.I)) 
         {
             Debug.Log(index);
             PlayWoodSound();
         }
-        
+        */
 
         if (audioSource.time >= clipCuts[index].y)
         {
             audioSource.Stop();
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.U)) 
         {
             PlayFootstep();
         }
-        
+        */
     }
 
     public void PlayWoodSound() 

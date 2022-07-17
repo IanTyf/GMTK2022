@@ -5,36 +5,43 @@ using UnityEngine;
 public class EffectsController : MonoBehaviour
 {
     public WoodFloorSound enemySounds;
-    public GameObject heartBeat;
-    public Material glitchMat;
-    public GameObject fogControl;
+    public AudioSource heartBeat;
+    public GlitchEffect glitchEffect;
+    public FogControl fogControl;
 
     
     public Monster monster;
 
     private bool footStepPlayed;
 
+    private float chaseStartDist;
+    private float startResettingStrength;
+
     // Start is called before the first frame update
     void Start()
     {
         footStepPlayed = false;
+        chaseStartDist = -1f;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        // enemy sounds
+        #region enemy sounds
         if (monster.mode_Monster == Monster.Mode.Partrol)
         {
-            if (Random.Range(0f, 1f) < Time.deltaTime)
+            if (Random.Range(0f, 1f) < Time.deltaTime * 0.1f)
             {
-                //enemySounds.PlayWoodSound();
+                enemySounds.PlayWoodSound();
             }
         }
         else if (monster.mode_Monster == Monster.Mode.Chase)
         {
             if (!footStepPlayed)
             {
-                //enemySounds.PlayFootstep();
+                enemySounds.PlayFootstep();
                 footStepPlayed = true;
             }
         }
@@ -44,5 +51,93 @@ public class EffectsController : MonoBehaviour
             // stop foot step audio
             enemySounds.StopAll();
         }
+        #endregion
+
+
+        // heartbeat
+        #region heartbeat
+        if (monster.mode_Monster == Monster.Mode.Chase && chaseStartDist == -1f)
+        {
+            chaseStartDist = monster.Dist_player_Monster();
+        }
+        else if (monster.mode_Monster == Monster.Mode.Partrol)
+        {
+            chaseStartDist = -1f;
+        }
+
+        // chaseStartDist = -1 -> volume 0.05 && pitch 0.7
+
+        // chaseStartDist = max -> volume 0.05 && pitch 0.7
+        // chaseStartDist <= monster.killDist -> volume 0.7 && pitch 1.4
+        if (chaseStartDist == -1)
+        {
+            heartBeat.volume = 0.05f;
+            heartBeat.pitch = 0.7f;
+        }
+        else
+        {
+            float dist = monster.Dist_player_Monster();
+            if (dist < monster.KillDist) dist = monster.KillDist;
+            float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
+            heartBeat.volume = 0.7f + frac * -0.65f;
+            heartBeat.pitch = 1.4f + frac * -0.7f;
+        }
+        #endregion
+
+
+        // fog
+        #region fog
+        if (chaseStartDist == -1)
+        {
+            fogControl.FogDensity = 0.1f;
+        }
+        else
+        {
+            float dist = monster.Dist_player_Monster();
+            if (dist < monster.KillDist) dist = monster.KillDist;
+            float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
+            fogControl.FogDensity = 1.0f + frac * -0.9f;
+        }
+        #endregion
+
+
+        // glitch effect
+        #region glitch effect
+        if (monster.mode_Monster == Monster.Mode.Chase && chaseStartDist == -1f)
+        {
+            chaseStartDist = monster.Dist_player_Monster();
+        }
+        else if (monster.mode_Monster == Monster.Mode.Partrol)
+        {
+            chaseStartDist = -1f;
+        }
+
+
+        if (chaseStartDist == -1)
+        {
+            glitchEffect.glitchStrength = 0f;
+        }
+        else
+        {
+            if (monster.mode_Monster != Monster.Mode.InReseting)
+            {
+                float dist = monster.Dist_player_Monster();
+                if (dist < monster.KillDist) dist = monster.KillDist;
+                float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
+                glitchEffect.glitchStrength = 1.0f + frac * -1f;
+
+                startResettingStrength = 0f;
+            }
+            else
+            {
+                if (startResettingStrength == 0f) startResettingStrength = glitchEffect.glitchStrength;
+
+                float frac = monster.reset_Timer / monster.resetTime;
+                glitchEffect.glitchStrength = startResettingStrength * frac;
+            }
+        }
+        #endregion
+
+        
     }
 }

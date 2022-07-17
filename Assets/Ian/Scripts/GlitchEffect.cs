@@ -25,6 +25,7 @@ public class GlitchEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //increase = 1.01f;
@@ -39,6 +40,7 @@ public class GlitchEffect : MonoBehaviour
         glitchStrength += Time.deltaTime * direction * 0.5f;
         if (glitchStrength > 1) glitchStrength = 1;
         if (glitchStrength < 0) glitchStrength = 0;
+        */
 
         float s = 1 / Mathf.Pow((1 + Mathf.Exp(-30 * (glitchStrength - 0.5f))), 0.3f);
 

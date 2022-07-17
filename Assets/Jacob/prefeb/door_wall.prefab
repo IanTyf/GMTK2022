@@ -95,10 +95,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8311396077803868096, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 210173e4d05beb847b47b66b13577f67, type: 2}
+    - target: {fileID: -7875616957889285705, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5fbdbe259f4827945a637e33e29d0b7d, type: 2}
+    - target: {fileID: -7630622879466270852, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: edc127fab749acf4d8575d0cd0ea8927, type: 2}
+    - target: {fileID: -5029514030235637397, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 760fb1bf40f7f714189ffd0a9073bbba, type: 2}
+    - target: {fileID: -2513638274269162508, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 403407d88e4da24428d55537428364e3, type: 2}
+    - target: {fileID: -1814183095850316574, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 403407d88e4da24428d55537428364e3, type: 2}
     - target: {fileID: 919132149155446097, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
       propertyPath: m_Name
       value: door
       objectReference: {fileID: 0}
+    - target: {fileID: 2776943404272126311, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 760fb1bf40f7f714189ffd0a9073bbba, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff569350d1a165243a1a1c8fb94478ab, type: 3}
 --- !u!4 &7624131825888696006 stripped
@@ -169,6 +197,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 693770b8de4d9e14c84b15e681701402, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: edc127fab749acf4d8575d0cd0ea8927, type: 2}
     - target: {fileID: 919132149155446097, guid: 693770b8de4d9e14c84b15e681701402, type: 3}
       propertyPath: m_Name
       value: wall with door
