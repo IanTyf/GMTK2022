@@ -18,7 +18,7 @@ public class Pencil : MonoBehaviour
         selfRigidBody.AddRelativeTorque(RollTorque, ForceMode.Impulse);
     }
 
-
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.gameObject.CompareTag("player")) 
@@ -26,12 +26,24 @@ public class Pencil : MonoBehaviour
             PencilTouched();
         }
     }
+    */
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "PlayerTrigger")
+        {
+            PencilTouched();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKey(KeyCode.K))
         {
             PencilTouched();
         }
+        */
     }
 }

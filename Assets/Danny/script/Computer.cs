@@ -12,18 +12,19 @@ public class Computer : MonoBehaviour
         
     }
 
-    public void TrunOnScreen() 
+    public void TurnOnScreen() 
     {
         this.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(LightIntensity, LightIntensity, LightIntensity, 0));
     }
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKey(KeyCode.M)) 
         {
             TrunOnScreen();
         }
-        
+        */
     }
 
     private void OnDestroy()
