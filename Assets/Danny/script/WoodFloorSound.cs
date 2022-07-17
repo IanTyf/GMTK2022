@@ -43,7 +43,7 @@ public class WoodFloorSound : MonoBehaviour
 
     public void PlayWoodSound() 
     {
-        stepAudio.Stop();
+        StopAll();
         index = Mathf.Max(0, UnityEngine.Random.Range(0, clipCuts.Length - 1));
         //audioSource.clip = woodClip;
         audioSource.time = clipCuts[index].x;
@@ -52,7 +52,13 @@ public class WoodFloorSound : MonoBehaviour
 
     public void PlayFootstep() 
     {
-        audioSource.Stop();
+        StopAll();
         stepAudio.Play();
+    }
+
+    public void StopAll()
+    {
+        audioSource.Stop();
+        stepAudio.Stop();
     }
 }

@@ -562,7 +562,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &432684305
 PrefabInstance:
@@ -2156,10 +2156,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7183286181390360814, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
-      propertyPath: tooLoudThreshold
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 7183286181508935001, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: camTransform
       value: 
