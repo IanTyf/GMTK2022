@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Danny/scenes/Scene_Start.unity
     guid: 3f6a584052674e84ba7ee79f5419143f
+  - enabled: 1
+    path: Assets/Ian/Scenes/Scene_Main.unity
+    guid: da67a8326b4fb4849997cab37b4692d2
+  - enabled: 1
+    path: Assets/Ian/Scenes/Scene_Lost.unity
+    guid: 2f8edf715c8064646813f113b3056bb1
   m_configObjects: {}

@@ -11,6 +11,12 @@ public class EndSceneGameManager : MonoBehaviour
 
     private bool end;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +44,7 @@ public class EndSceneGameManager : MonoBehaviour
     {
         anim.SetTrigger("fadeToBlackSlow");
 
-        Invoke("loadMainMenu", 4f);
+        Invoke("loadMainMenu", 7f);
     }
 
     private void loadMainMenu()

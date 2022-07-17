@@ -44,23 +44,23 @@ public class PlayerDropSound : MonoBehaviour
         switch (currentSurface)
         {
             case "Desk":
-                updateVolumeAndPitch(0.15f, 0.8f);
+                updateVolumeAndPitch(0.10f, 0.8f);
                 updateSound(deskRollSound);
                 break;
             case "Floor":
-                updateVolumeAndPitch(0.15f, 0.8f);
+                updateVolumeAndPitch(0.10f, 0.8f);
                 updateSound(deskRollSound);
                 break;
             case "Counter":
-                updateVolumeAndPitch(1f, 1.24f);
+                updateVolumeAndPitch(0.8f, 1.24f);
                 updateSound(carpetRollSound);
                 break;
             case "Carpet":
-                updateVolumeAndPitch(1f, 1.24f);
+                updateVolumeAndPitch(0.8f, 1.24f);
                 updateSound(carpetRollSound);
                 break;
             case "Bed":
-                updateVolumeAndPitch(1f, 1.24f);
+                updateVolumeAndPitch(0.8f, 1.24f);
                 updateSound(carpetRollSound);
                 break;
         }

@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
 
             StaticManager.deathCount = 0;
             // go to fourth scene
+            SceneManager.LoadScene("Scene_Lost");
         }
     }
 }
