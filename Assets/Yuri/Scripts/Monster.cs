@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour
     private float monsterSpeed;
 
     [SerializeField]
-    private float KillDist =3;
+    public float KillDist =3;
     
 
     public enum Mode
@@ -21,9 +21,9 @@ public class Monster : MonoBehaviour
 
     public Mode mode_Monster;
     #region Reset
-    private float resetTime = 3;
+    public float resetTime = 3;
     [SerializeField]
-    private float reset_Timer = 0;
+    public float reset_Timer = 0;
 
     public bool ableToSearchPlayer = false;
 
@@ -321,7 +321,7 @@ public class Monster : MonoBehaviour
         transform.Translate((player.transform.position-transform.position)*Time.deltaTime*monsterSpeed);
     }
 
-    float Dist_player_Monster()
+    public float Dist_player_Monster()
     {
         
         return Vector3.Distance(transform.position, player.transform.position);
