@@ -1006,7 +1006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &971239488
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1310,10 +1310,10 @@ Transform:
   - {fileID: 736462307}
   - {fileID: 2015451466}
   - {fileID: 1890319384}
+  - {fileID: 543450651593452200}
   - {fileID: 699512489}
   - {fileID: 283015964}
   - {fileID: 472185517}
-  - {fileID: 543450651593452200}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1917,6 +1917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1730602470}
   monsterSpeed: 0.2
+  mode_Monster: 0
   reset_Timer: 0
   ableToSearchPlayer: 0
   navPoints:
@@ -2628,7 +2629,7 @@ Transform:
   - {fileID: 5287344303414218896}
   - {fileID: 2908412264261301817}
   m_Father: {fileID: 1180330835}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &693043159107777208
 MeshRenderer:
