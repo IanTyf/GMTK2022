@@ -41,11 +41,21 @@ public class GlitchEffect : MonoBehaviour
         if (glitchStrength > 1) glitchStrength = 1;
         if (glitchStrength < 0) glitchStrength = 0;
         */
+        if (glitchStrength == 0)
+        {
+            mat.SetFloat("_Strength", 0f);
+            return;
+        }
 
         float s = 1 / Mathf.Pow((1 + Mathf.Exp(-30 * (glitchStrength - 0.5f))), 0.3f);
 
         
         mat.SetFloat("_Strength", 0.1f * s * Random.Range(-1.1f, 1.1f));
         posneg *= -1;
+    }
+
+    private void OnDisable()
+    {
+        mat.SetFloat("_Strength", 0f);
     }
 }

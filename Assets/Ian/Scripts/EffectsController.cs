@@ -16,12 +16,15 @@ public class EffectsController : MonoBehaviour
 
     private float chaseStartDist;
     private float startResettingStrength;
+    private float fogResettingDensity;
 
     // Start is called before the first frame update
     void Start()
     {
         footStepPlayed = false;
         chaseStartDist = -1f;
+        fogResettingDensity = 0.1f;
+        startResettingStrength = 0f;
     }
 
     // Update is called once per frame
@@ -71,8 +74,11 @@ public class EffectsController : MonoBehaviour
         // chaseStartDist <= monster.killDist -> volume 0.7 && pitch 1.4
         if (chaseStartDist == -1)
         {
-            heartBeat.volume = 0.05f;
-            heartBeat.pitch = 0.7f;
+            heartBeat.volume -= Time.deltaTime * 0.15f;
+            heartBeat.pitch -= Time.deltaTime * 0.15f;
+
+            heartBeat.volume = (heartBeat.volume < 0.05f) ? 0.05f : heartBeat.volume;
+            heartBeat.pitch = (heartBeat.pitch < 0.7f) ? 0.7f : heartBeat.pitch;
         }
         else
         {
@@ -93,10 +99,22 @@ public class EffectsController : MonoBehaviour
         }
         else
         {
-            float dist = monster.Dist_player_Monster();
-            if (dist < monster.KillDist) dist = monster.KillDist;
-            float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
-            fogControl.FogDensity = 1.0f + frac * -0.9f;
+            if (monster.mode_Monster != Monster.Mode.InReseting)
+            {
+                float dist = monster.Dist_player_Monster();
+                if (dist < monster.KillDist) dist = monster.KillDist;
+                float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
+                fogControl.FogDensity = 1.0f + frac * -0.9f;
+
+                fogResettingDensity = 0.1f;
+            }
+            else
+            {
+                if (fogResettingDensity == 0.1f) fogResettingDensity = fogControl.FogDensity;
+
+                float frac = monster.reset_Timer / monster.resetTime;
+                fogControl.FogDensity = fogResettingDensity * frac * 0.9f + 0.1f;
+            }
         }
         #endregion
 
