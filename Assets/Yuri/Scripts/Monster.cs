@@ -22,6 +22,7 @@ public class Monster : MonoBehaviour
     }
 
     public Mode mode_Monster;
+    
     #region Reset
     public float resetTime = 3;
     [SerializeField]
@@ -326,7 +327,6 @@ public class Monster : MonoBehaviour
 
     public float Dist_player_Monster()
     {
-        
         return Vector3.Distance(transform.position, player.transform.position);
     }
 

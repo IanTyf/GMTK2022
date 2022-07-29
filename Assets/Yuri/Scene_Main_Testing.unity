@@ -10570,8 +10570,9 @@ GameObject:
   - component: {fileID: 1108572703}
   - component: {fileID: 1108572702}
   - component: {fileID: 1108572700}
+  - component: {fileID: 1108572705}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: Monster_Testing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10584,7 +10585,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108572699}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e70f74d0a9322124e8a930576de961c1, type: 3}
   m_Name: 
@@ -10633,7 +10634,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1108572699}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -10645,7 +10646,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108572699}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10687,6 +10688,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108572699}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1108572705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108572699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eac572c41fd5b4d8ec4069f9597474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 684655223}
+  gm: {fileID: 362073672}
+  coverDetect:
+    serializedVersion: 2
+    m_Bits: 8
+  monsterSpeed: 1.5
+  KillDist: 3
+  mode_Monster: 0
+  navPoints:
+  - {fileID: 413005517}
+  - {fileID: 62510042}
+  - {fileID: 1556558202}
+  - {fileID: 1649726123}
+  curPoint: {fileID: 0}
+  testingTimer: 0
 --- !u!1 &1117037129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5387299745075872219, guid: c993aa4112371e246b0d8e0184186bc4, type: 3}
