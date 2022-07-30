@@ -124,11 +124,12 @@ public class TurnbaseController : MonoBehaviour
     void UpdateCurPlayerData()
     {
         //锥形被看到
-        Debug.Log("PatrolDetectPlayer"+monsterScript.PatrolDetectPlayer());
+        
         if (monsterScript.PatrolDetectPlayer())
         {
             // expo =true
             curPlayerExpo = true;
+            Debug.Log("PatrolDetectPlayer"+monsterScript.PatrolDetectPlayer());
         }
         else
         {
@@ -146,26 +147,24 @@ public class TurnbaseController : MonoBehaviour
             }
         }
         
-        /*
+        
         //if chase mode 有没有掩体挡住
         if (monsterScript.mode_Monster != Monster_Turnbase.Mode.Partrol)
         {
-            
-        }
-        */
-        
-        Debug.Log("DetectPlayer"+monsterScript.DetectPlayer());
-        //有掩体挡住
-        if (monsterScript.DetectPlayer())
-        {
-            curPlayerExpo = true;
-        }
-        else
-            //没有有掩体挡住
-        {
-            curPlayerExpo = false;
+            //有掩体挡住
+            if (monsterScript.DetectPlayer())
+            {
+                Debug.Log("DetectPlayer"+monsterScript.DetectPlayer());
+                curPlayerExpo = true;
+            }
+            else
+                //没有有掩体挡住
+            {
+                curPlayerExpo = false;
+            }
         }
         
+
 
     }
 }

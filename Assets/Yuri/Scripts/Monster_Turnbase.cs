@@ -159,13 +159,20 @@ public class Monster_Turnbase : MonoBehaviour
     
     void setNewPoint()
     {
-        int newIndex = (int)Random.Range(0, navPoints.Count);
+        /*int newIndex = (int)Random.Range(0, navPoints.Count);
         while (newIndex == curIndex)
         {
             newIndex = (int)Random.Range(0, navPoints.Count);
-        }
+        }*/
         
-        curIndex = newIndex;
+        if (curIndex < navPoints.Count)
+        {
+            curIndex++;
+        }
+        else
+        {
+            curIndex = 0;
+        }
         curPoint = navPoints[curIndex];
     }
     public bool DetectPlayer()
@@ -201,11 +208,11 @@ public class Monster_Turnbase : MonoBehaviour
         RaycastHit coneHit;
         if (Physics.Raycast(transform.position, player.transform.position-transform.position, out coneHit, Mathf.Infinity))
         {
-            //hit 到 夹角<45 >-45
+            //hit 到 夹角<15 >-15
             Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
-            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 45
+            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 25
                 ||
-                Vector3.Angle(player.transform.position - transform.position, transform.forward) > 315)
+                Vector3.Angle(player.transform.position - transform.position, transform.forward) > 335)
             {
                 if (coneHit.transform.tag == "Player")
                 {
