@@ -27,7 +27,7 @@ public class rollSoundManager : MonoBehaviour
         }
         else
         {
-            transform.parent.GetComponent<roll>().playerMode = roll.Mode.Idle;
+            //transform.parent.GetComponent<roll>().playerMode = roll.Mode.Idle;
         }
     }
 

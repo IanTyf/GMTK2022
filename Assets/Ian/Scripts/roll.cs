@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class roll : MonoBehaviour
 {
+    #region Reference
+
+    public TurnbaseController turnbaseController;
+
+
+    #endregion
     public enum Mode
     {
         Idle, MakeSound, Dead
@@ -111,6 +117,7 @@ public class roll : MonoBehaviour
         {
             // new frame
             Debug.Log("new frame");
+            turnbaseController.newTurn();
             canMove = true;
         }
 

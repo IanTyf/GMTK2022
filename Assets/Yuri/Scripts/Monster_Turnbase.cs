@@ -46,7 +46,7 @@ public class Monster_Turnbase : MonoBehaviour
 
     void Start()
     {
-        mode_Monster = Mode.Idle;
+        mode_Monster = Mode.Partrol;
         testingTimer = testingTime;
         
         setNewPoint();
@@ -56,6 +56,7 @@ public class Monster_Turnbase : MonoBehaviour
     
     void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward*100,Color.yellow);
         /*testingTimer -= Time.deltaTime;
         if (testingTimer < 0)
         {
@@ -75,18 +76,18 @@ public class Monster_Turnbase : MonoBehaviour
         else
         //判断行动
         {
-            //怪物根据上一回合玩家的位置行动
+            //怪物根据玩家的位置行动
             //上一回合被发现
             switch (mode_Monster)
             {
                 case Mode.Partrol:
-                    if (prePlayerExpo)
+                    if (curPlayerExpo)
                     {
                         mode_Monster = Mode.Attention;
                     }
                     break;
                 case Mode.Attention:
-                    if (prePlayerExpo)
+                    if (curPlayerExpo)
                     {
                         mode_Monster = Mode.Chase;
                     }
@@ -96,7 +97,7 @@ public class Monster_Turnbase : MonoBehaviour
                     }
                     break;
                 case Mode.Chase:
-                    if (prePlayerExpo)
+                    if (curPlayerExpo)
                     {
                         mode_Monster = Mode.Chase;
                     }
@@ -131,7 +132,7 @@ public class Monster_Turnbase : MonoBehaviour
     }
     public void ChasePlayer()
     {
-        transform.Translate((player.transform.position-transform.position).normalized*monsterSpeed*1);
+        transform.Translate((player.transform.position-transform.position).normalized*monsterSpeed*1,Space.World);
     }
     public float Dist_player_Monster()
     {
@@ -143,13 +144,15 @@ public class Monster_Turnbase : MonoBehaviour
         if (Vector3.Distance(transform.position, curPoint.transform.position) > monsterSpeed)
         {
             transform.LookAt(curPoint.transform.position);
-            transform.Translate((curPoint.transform.position-transform.position).normalized*1);
+            transform.Translate((curPoint.transform.position-transform.position).normalized*1,Space.World);
+            Debug.Log(curPoint.transform.position);
         }
         else
         {
             transform.LookAt(curPoint.transform.position);
             transform.position = curPoint.transform.position;
             setNewPoint();
+            Debug.Log("Switch point");
         }
         //transform.position = navPoints[(int) Random.Range(0,navPoints.Count)].transform.position;
     }
@@ -169,11 +172,11 @@ public class Monster_Turnbase : MonoBehaviour
     {
         RaycastHit hit;
         //walking
-        if (Physics.Raycast(transform.position, player.transform.position-transform.position,out hit,Mathf.Infinity,coverDetect))
+        if (Physics.Raycast(transform.position, player.transform.position-transform.position,out hit,Mathf.Infinity))
         {
             //Debug.Log(hit.transform.name);
             //Debug.Log(Vector3.Distance(transform.position,player.transform.position));
-            if (hit.transform.tag == "unCover")
+            if (hit.transform.tag == "Player")
             {
                 Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.red);
                 //Debug.Log("moving");
@@ -192,4 +195,43 @@ public class Monster_Turnbase : MonoBehaviour
             return false;
         }
     }
+
+    public bool PatrolDetectPlayer()
+    {
+        RaycastHit coneHit;
+        if (Physics.Raycast(transform.position, player.transform.position-transform.position, out coneHit, Mathf.Infinity))
+        {
+            //hit 到 夹角<45 >-45
+            Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
+            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 45
+                ||
+                Vector3.Angle(player.transform.position - transform.position, transform.forward) > 315)
+            {
+                if (coneHit.transform.tag == "Player")
+                {
+                    Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.blue);
+                    //Debug.Log("moving");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            //没hit到
+            {
+                Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.black);
+                //Debug.Log("moving");
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    
 }

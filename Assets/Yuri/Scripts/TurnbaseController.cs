@@ -49,7 +49,7 @@ public class TurnbaseController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-            startTest = true;
+            //startTest = true;
         }
 
         if (startTest)
@@ -86,7 +86,9 @@ public class TurnbaseController : MonoBehaviour
         UpdateCurPlayerData();
 
         Monster.GetComponent<Monster_Turnbase>().MonsterRound(prePlayerExpo,curPlayerExpo);
-        if (player.GetComponent<roll>().playerMode != roll.Mode.Dead)
+
+        prePlayerExpo = curPlayerExpo;
+        /*if (player.GetComponent<roll>().playerMode != roll.Mode.Dead)
         {
             //怪物根据上一回合玩家的位置行动
             //上一回合被发现
@@ -116,20 +118,54 @@ public class TurnbaseController : MonoBehaviour
             }
         
             //* 记录这一回合玩家的信息
-        }
+        }*/
     }
 
     void UpdateCurPlayerData()
     {
-        if (player.GetComponent<roll>().playerMode == roll.Mode.MakeSound
-            ||
-            monsterScript.DetectPlayer())
+        //锥形被看到
+        Debug.Log("PatrolDetectPlayer"+monsterScript.PatrolDetectPlayer());
+        if (monsterScript.PatrolDetectPlayer())
         {
+            // expo =true
             curPlayerExpo = true;
         }
         else
         {
+            //锥形没被看到，声音被听到
+            if (player.GetComponent<roll>().playerMode == roll.Mode.MakeSound)
+            {
+                curPlayerExpo = true;
+                player.GetComponent<roll>().playerMode = roll.Mode.Idle;
+                //如果有掩体 不expo
+            }
+            else 
+                //锥形没被看到，声音没被听到
+            {
+                curPlayerExpo = false;
+            }
+        }
+        
+        /*
+        //if chase mode 有没有掩体挡住
+        if (monsterScript.mode_Monster != Monster_Turnbase.Mode.Partrol)
+        {
+            
+        }
+        */
+        
+        Debug.Log("DetectPlayer"+monsterScript.DetectPlayer());
+        //有掩体挡住
+        if (monsterScript.DetectPlayer())
+        {
+            curPlayerExpo = true;
+        }
+        else
+            //没有有掩体挡住
+        {
             curPlayerExpo = false;
         }
+        
+
     }
 }
