@@ -34,7 +34,7 @@ public class PlayerDropSound : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.2f, surfaceCheck))
         {
-            Debug.Log("hit " + hit.collider.name);
+            //Debug.Log("hit " + hit.collider.name);
             if (hit.collider.tag == "standable")
                 currentSurface = hit.collider.gameObject.name;
         }
