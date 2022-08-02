@@ -3808,6 +3808,8 @@ MonoBehaviour:
   startTest: 0
   testingTime: 2
   testingTimer: 0
+  monsterMoveCD: 3
+  monsterMoveCounter: 0
 --- !u!1001 &366540099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11023,7 +11025,8 @@ MonoBehaviour:
   coverDetect:
     serializedVersion: 2
     m_Bits: 8
-  monsterSpeed: 1.5
+  monsterSpeed: 10
+  monsterChaseSpeed: 5
   KillDist: 3
   mode_Monster: 1
   navPoints:
@@ -21293,7 +21296,7 @@ MonoBehaviour:
   heartBeat: {fileID: 1348381715}
   glitchEffect: {fileID: 1986529825}
   fogControl: {fileID: 1986529821}
-  monster: {fileID: 1108572700}
+  monster: {fileID: 1108572705}
 --- !u!114 &1986529821
 MonoBehaviour:
   m_ObjectHideFlags: 0

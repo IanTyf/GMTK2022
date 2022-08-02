@@ -35,6 +35,10 @@ public class TurnbaseController : MonoBehaviour
     [SerializeField]
     private float testingTimer = 0;
 
+    public int monsterMoveCD;
+    [SerializeField]
+    private int monsterMoveCounter;
+
     private void Awake()
     {
         
@@ -83,11 +87,16 @@ public class TurnbaseController : MonoBehaviour
          */
         //player.PlayerRound()
 
-        UpdateCurPlayerData();
+        if (++monsterMoveCounter > monsterMoveCD)
+        {
+            UpdateCurPlayerData();
 
-        Monster.GetComponent<Monster_Turnbase>().MonsterRound(prePlayerExpo,curPlayerExpo);
+            Monster.GetComponent<Monster_Turnbase>().MonsterRound(prePlayerExpo, curPlayerExpo);
 
-        prePlayerExpo = curPlayerExpo;
+            prePlayerExpo = curPlayerExpo;
+
+            monsterMoveCounter = 0;
+        }
         /*if (player.GetComponent<roll>().playerMode != roll.Mode.Dead)
         {
             //怪物根据上一回合玩家的位置行动
