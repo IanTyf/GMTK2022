@@ -22,6 +22,6 @@ public class PaintingSwap : MonoBehaviour
 
     public void updateTexture(int ind)
     {
-        mr.material.SetTexture("_MainTex", allTextures[ind]);
+        mr.material.mainTexture = allTextures[ind];
     }
 }
