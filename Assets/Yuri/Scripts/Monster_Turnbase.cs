@@ -16,7 +16,9 @@ public class Monster_Turnbase : MonoBehaviour
     [SerializeField]
     private float monsterSpeed;
     [SerializeField]
-    public float KillDist =3;
+    private float monsterChaseSpeed;
+    [SerializeField]
+    public float KillDist =3f;
     #endregion
 
     #region Behaviors
@@ -132,7 +134,7 @@ public class Monster_Turnbase : MonoBehaviour
     }
     public void ChasePlayer()
     {
-        transform.Translate((player.transform.position-transform.position).normalized*monsterSpeed*1,Space.World);
+        transform.Translate((player.transform.position-transform.position).normalized*monsterChaseSpeed*1f,Space.World);
     }
     public float Dist_player_Monster()
     {
@@ -144,7 +146,7 @@ public class Monster_Turnbase : MonoBehaviour
         if (Vector3.Distance(transform.position, curPoint.transform.position) > monsterSpeed)
         {
             transform.LookAt(curPoint.transform.position);
-            transform.Translate((curPoint.transform.position-transform.position).normalized*1,Space.World);
+            transform.Translate((curPoint.transform.position-transform.position).normalized*1*monsterSpeed,Space.World);
             Debug.Log(curPoint.transform.position);
         }
         else

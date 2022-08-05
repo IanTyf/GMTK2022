@@ -10,7 +10,7 @@ public class EffectsController : MonoBehaviour
     public FogControl fogControl;
 
     
-    public Monster monster;
+    public Monster_Turnbase monster;
 
     private bool footStepPlayed;
 
@@ -33,14 +33,15 @@ public class EffectsController : MonoBehaviour
 
         // enemy sounds
         #region enemy sounds
-        if (monster.mode_Monster == Monster.Mode.Partrol)
+        if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol)
         {
             if (Random.Range(0f, 1f) < Time.deltaTime * 0.1f)
             {
                 enemySounds.PlayWoodSound();
             }
         }
-        else if (monster.mode_Monster == Monster.Mode.Chase)
+        /*
+        else if (monster.mode_Monster == Monster_Turnbase.Mode.Chase)
         {
             if (!footStepPlayed)
             {
@@ -48,6 +49,7 @@ public class EffectsController : MonoBehaviour
                 footStepPlayed = true;
             }
         }
+        */
         else
         {
             footStepPlayed = false;
@@ -59,11 +61,11 @@ public class EffectsController : MonoBehaviour
 
         // heartbeat
         #region heartbeat
-        if (monster.mode_Monster == Monster.Mode.Chase && chaseStartDist == -1f)
+        if (monster.mode_Monster == Monster_Turnbase.Mode.Attention && chaseStartDist == -1f)
         {
             chaseStartDist = monster.Dist_player_Monster();
         }
-        else if (monster.mode_Monster == Monster.Mode.Partrol)
+        else if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol)
         {
             chaseStartDist = -1f;
         }
@@ -85,8 +87,8 @@ public class EffectsController : MonoBehaviour
             float dist = monster.Dist_player_Monster();
             if (dist < monster.KillDist) dist = monster.KillDist;
             float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
-            heartBeat.volume = 0.7f + frac * -0.65f;
-            heartBeat.pitch = 1.4f + frac * -0.7f;
+            heartBeat.volume = (0.7f + frac * -0.65f) * 0.9f + 0.05f;
+            heartBeat.pitch = (1.4f + frac * -0.7f) * 0.9f + 0.08f;
         }
         #endregion
 
@@ -122,11 +124,11 @@ public class EffectsController : MonoBehaviour
 
         // glitch effect
         #region glitch effect
-        if (monster.mode_Monster == Monster.Mode.Chase && chaseStartDist == -1f)
+        if (monster.mode_Monster == Monster_Turnbase.Mode.Attention && chaseStartDist == -1f)
         {
             chaseStartDist = monster.Dist_player_Monster();
         }
-        else if (monster.mode_Monster == Monster.Mode.Partrol)
+        else if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol)
         {
             chaseStartDist = -1f;
         }
@@ -138,15 +140,16 @@ public class EffectsController : MonoBehaviour
         }
         else
         {
-            if (monster.mode_Monster != Monster.Mode.InReseting)
-            {
+            //if (monster.mode_Monster != Monster_Turnbase.Mode.InReseting)
+            //{
                 float dist = monster.Dist_player_Monster();
                 if (dist < monster.KillDist) dist = monster.KillDist;
                 float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
-                glitchEffect.glitchStrength = 1.0f + frac * -1f;
-
+                glitchEffect.glitchStrength = (1.0f + frac * -1f)*0.6f + 0.2f;
+                
                 startResettingStrength = 0f;
-            }
+            //}
+            /*
             else
             {
                 if (startResettingStrength == 0f) startResettingStrength = glitchEffect.glitchStrength;
@@ -154,6 +157,7 @@ public class EffectsController : MonoBehaviour
                 float frac = monster.reset_Timer / monster.resetTime;
                 glitchEffect.glitchStrength = startResettingStrength * frac;
             }
+            */
         }
         #endregion
 

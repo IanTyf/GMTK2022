@@ -71,7 +71,7 @@ public class PlayerDropSound : MonoBehaviour
             {
                 audioSource.PlayOneShot(woodDropFromHigh);
                 // biss
-                gm.dieInstantly();
+                //gm.dieInstantly();
             }
         }
         else if (oldName.Equals("Counter"))
