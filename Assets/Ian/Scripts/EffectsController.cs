@@ -123,7 +123,9 @@ public class EffectsController : MonoBehaviour
     */
 
         // glitch effect
+
         #region glitch effect
+
         if (monster.mode_Monster == Monster_Turnbase.Mode.Attention && chaseStartDist == -1f)
         {
             chaseStartDist = monster.Dist_player_Monster();

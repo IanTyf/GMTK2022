@@ -73,6 +73,10 @@ public class PlayerDropSound : MonoBehaviour
                 // biss
                 //gm.dieInstantly();
             }
+            else if (currentSurface.Equals("Counter"))
+            {
+                StaticManager.curCheckPoint = CheckPoint.Counter;
+            }
         }
         else if (oldName.Equals("Counter"))
         {

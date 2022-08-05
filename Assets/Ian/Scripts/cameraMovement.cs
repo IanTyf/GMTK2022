@@ -15,8 +15,7 @@ public class cameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        xRot = transform.eulerAngles.x;
-        yRot = transform.eulerAngles.y;
+        // initRot is called in roll's start after rotation adjustment is complete
     }
 
     // Update is called once per frame
@@ -33,6 +32,12 @@ public class cameraMovement : MonoBehaviour
         if (xRot > 75f) xRot = 75f;
 
         transform.rotation = Quaternion.Euler(xRot, yRot, 0f);
+    }
+
+    public void InitRot()
+    {
+        xRot = transform.eulerAngles.x;
+        yRot = transform.eulerAngles.y;
     }
 
     /*

@@ -31,6 +31,8 @@ public class roll : MonoBehaviour
 
     public bool canMove;
 
+    public bool canNewFrame;
+    public float newFrameOffset;
 
     private float prevSpeed;
 
@@ -43,6 +45,8 @@ public class roll : MonoBehaviour
         playerMode = Mode.Idle;
 
         canMove = true;
+        camTransform.Rotate(new Vector3(0f, transform.rotation.eulerAngles.y, 0f), Space.World);
+        camMovement.InitRot();
     }
 
     // Update is called once per frame
@@ -113,13 +117,20 @@ public class roll : MonoBehaviour
 
         }
 
-        if (rb.velocity.magnitude == 0f && prevSpeed > 0)
+        if (rb.velocity.magnitude < newFrameOffset && prevSpeed > rb.velocity.magnitude && canNewFrame)
         {
             // new frame
             Debug.Log("new frame");
             turnbaseController.newTurn();
-            canMove = true;
+            canNewFrame = false;
         }
+
+        if (rb.velocity.magnitude == 0f && prevSpeed > 0)
+        {
+            canMove = true;
+            canNewFrame = true;
+        }
+
 
         prevSpeed = rb.velocity.magnitude;
         

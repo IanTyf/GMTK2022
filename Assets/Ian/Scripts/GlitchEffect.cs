@@ -37,10 +37,11 @@ public class GlitchEffect : MonoBehaviour
             direction = -1;
         }
 
-        glitchStrength += Time.deltaTime * direction * 0.5f;
+        glitchStrength += Time.deltaTime * direction * 5f;
         if (glitchStrength > 1) glitchStrength = 1;
         if (glitchStrength < 0) glitchStrength = 0;
         */
+
         if (glitchStrength == 0)
         {
             mat.SetFloat("_Strength", 0f);
