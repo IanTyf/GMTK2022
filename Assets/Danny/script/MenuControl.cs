@@ -7,12 +7,16 @@ using UnityEngine;
 public class MenuControl : MonoBehaviour
 {
 
-    public Texture2D[] menuTextures;
+    public Texture2D[] chessTextures;
     public Material chessBoradMat;
-    public GameObject vcam1;
-
-
+    
+    public Texture2D[] rulebookTextures;
+    public Material rulebookMat;
     public Animator ruleBookAnimator;
+    private int n = 0;
+
+
+    public GameObject vcam1;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +34,7 @@ public class MenuControl : MonoBehaviour
 
     public void changeTex(int targetTexIndex) 
     {
-        chessBoradMat.SetTexture("_Texture2D", menuTextures[targetTexIndex]);
+        chessBoradMat.SetTexture("_Texture2D", chessTextures[targetTexIndex]);
     }
 
     //chessborad texture control
@@ -91,5 +95,18 @@ public class MenuControl : MonoBehaviour
     public void GameBegin() 
     {
         vcam1.SetActive(false);
+    }
+
+    public void RulebookChange() 
+    {
+        if (n == 0)
+        {
+            n = 1;
+        }
+        else 
+        {
+            n = 0;
+        }
+        rulebookMat.SetTexture("_Texture2D", rulebookTextures[n]);
     }
 }
