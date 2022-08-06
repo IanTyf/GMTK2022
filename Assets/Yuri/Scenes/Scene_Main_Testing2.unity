@@ -2398,8 +2398,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162295543}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.3199997, y: 0.44799995, z: 0.48999977}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalPosition: {x: -0.87, y: 0.44799995, z: 1.06}
+  m_LocalScale: {x: 1.5, y: 2.7141, z: 3.877617}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1100777032}
@@ -16887,7 +16887,7 @@ MonoBehaviour:
     m_Bits: 8
   monsterSpeed: 5
   monsterChaseSpeed: 2
-  KillDist: 1
+  KillDist: 3
   mode_Monster: 1
   navPoints:
   - {fileID: 424283451}
@@ -20085,7 +20085,7 @@ Transform:
   m_GameObject: {fileID: 1294179336}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 9, y: 0.44799995, z: 0.13999939}
-  m_LocalScale: {x: 1.8162278, y: 2.22085, z: 5.705}
+  m_LocalScale: {x: 1.8162278, y: 3.3954575, z: 5.705}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1100777032}

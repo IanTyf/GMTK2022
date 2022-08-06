@@ -174,7 +174,7 @@ public class Monster_Turnbase : MonoBehaviour
             //try forward
             transform.position = curPos;
             Debug.Log("Try forward");
-            transform.Translate((curPlayerPosXZ-curPos).normalized*(i+1)*.5f*monsterChaseSpeed,Space.World);
+            transform.Translate((curPlayerPosXZ-curPos).normalized*(i+1)*.1f*monsterChaseSpeed,Space.World);
             if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
             {
                 //D
@@ -191,7 +191,7 @@ public class Monster_Turnbase : MonoBehaviour
                     //try left
                     transform.position = curPos;
                     Debug.Log("Try left");
-                    transform.Translate(-transform.right*(i+1)*.5f*monsterChaseSpeed,Space.World);
+                    transform.Translate(-transform.right*(i+1)*.1f*monsterChaseSpeed,Space.World);
                     if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
                     {
                         if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
@@ -206,7 +206,7 @@ public class Monster_Turnbase : MonoBehaviour
                             //try right
                             transform.position = curPos;
                             Debug.Log("Try right");
-                            transform.Translate(transform.right*(i+1)*.5f*monsterChaseSpeed,Space.World);
+                            transform.Translate(transform.right*(i+1)*.1f*monsterChaseSpeed,Space.World);
                             if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
                             {
                                 if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
@@ -347,11 +347,13 @@ public class Monster_Turnbase : MonoBehaviour
     }
     public void ChasePlayer()
     {
-        curPos = transform.position;
+        
         
         //normal move
         transform.Translate((curPlayerPosXZ-curPos).normalized*monsterChaseSpeed*1f,Space.World);
 
+        curPos = transform.position;
+        
         RaycastHit ChasePlayerHit;
         //check hit
         if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out ChasePlayerHit, Mathf.Infinity))
@@ -374,6 +376,10 @@ public class Monster_Turnbase : MonoBehaviour
                 //hit something else
                 SetOneFrame = true;
             }
+        }
+        else
+        {
+            //正常走
         }
     }
 
