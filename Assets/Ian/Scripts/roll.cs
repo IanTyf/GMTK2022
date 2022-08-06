@@ -40,6 +40,9 @@ public class roll : MonoBehaviour
 
     private bool updateRoll;
 
+
+    public bool movementTestOnly;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,8 @@ public class roll : MonoBehaviour
         camTransform.position = transform.position;
         camTransform.Rotate(new Vector3(0f, transform.rotation.eulerAngles.y, 0f), Space.World);
         //camMovement.InitRot();
+
+        if (movementTestOnly) enableUpdate();
     }
 
     // Update is called once per frame

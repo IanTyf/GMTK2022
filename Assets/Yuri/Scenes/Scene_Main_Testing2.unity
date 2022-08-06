@@ -10966,6 +10966,10 @@ PrefabInstance:
       value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 7183286181508935001, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
+      propertyPath: movementTestOnly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183286181508935001, guid: 9b5b3f5c916205847b81c065e9c1210d, type: 3}
       propertyPath: coverLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}

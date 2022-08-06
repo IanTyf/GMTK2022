@@ -32,7 +32,14 @@ public class menuCamZoom : MonoBehaviour
     {
         if (zoomStart)
         {
-            transform.position = Vector3.Lerp(startPos, targetPos, zoomVal);
+            Vector3 newPos = Vector3.Lerp(startPos, targetPos, zoomVal);
+            float val = Mathf.Pow(zoomVal * 1.05f, 0.75f);
+            val = val > 1f ? 1f : val;
+            float newY = startPos.y + (targetPos.y - startPos.y) * val;
+            newPos.y = newY;
+            transform.position = newPos;
+
+
             Vector3 newEuler = Vector3.Lerp(startRot, targetRot, zoomVal);
             GetComponent<Camera>().fieldOfView = Mathf.Lerp(startFov, targetFov, zoomVal);
             transform.eulerAngles = newEuler;

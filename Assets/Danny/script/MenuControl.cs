@@ -19,7 +19,8 @@ public class MenuControl : MonoBehaviour
   
 
 
-    public GameObject vcam1;
+    //public GameObject vcam1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -116,7 +117,7 @@ public class MenuControl : MonoBehaviour
 
     public void GameBegin() 
     {
-        vcam1.SetActive(false);
+        //vcam1.SetActive(false);
     }
 
     public void RulebookChange() 

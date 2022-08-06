@@ -21769,7 +21769,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -21842,16 +21842,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59e294a774381740a9ebda3535eb59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 0.6
+  zoomSpeed: 0.1
   zoomStart: 0
   diceTransform: {fileID: 684655221}
   camTransform: {fileID: 1348381716}
-  startPos: {x: 0, y: 0, z: 0}
-  targetPos: {x: 0, y: 0, z: 0}
-  startRot: {x: 0, y: 0, z: 0}
-  targetRot: {x: 0, y: 0, z: 0}
-  startFov: 0
-  targetFov: 0
 --- !u!1001 &2015090238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25596,7 +25590,6 @@ MonoBehaviour:
   rulebookMat: {fileID: 2100000, guid: 25a06b319a281704a81a316b64b043e8, type: 2}
   rulebookAnimator: {fileID: 4510827264770911209}
   menuCam: {fileID: 2012337475}
-  vcam1: {fileID: 0}
 --- !u!1 &4510827264287420338
 GameObject:
   m_ObjectHideFlags: 0
