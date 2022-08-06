@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 public class MenuControl : MonoBehaviour
@@ -12,8 +12,11 @@ public class MenuControl : MonoBehaviour
     
     public Texture2D[] rulebookTextures;
     public Material rulebookMat;
-    public Animator ruleBookAnimator;
+    public Animator rulebookAnimator;
     private int n = 0;
+
+
+  
 
 
     public GameObject vcam1;
@@ -26,9 +29,9 @@ public class MenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.H)) 
+        if (Input.GetKeyDown(KeyCode.H)) 
         {
-            playClick();
+            RulebookChange();
         }
     }
 
@@ -66,24 +69,42 @@ public class MenuControl : MonoBehaviour
     }
     public void creditHover()
     {
-        changeTex(6);
+        changeTex(5);
     }
 
     public void creditClick()
     {
-        changeTex(7);
+        changeTex(6);
     }
     #endregion
 
 
     public void RuleHover() 
     {
-        ruleBookAnimator.SetTrigger("ruleHover");
+        if (rulebookAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime>0.05f)
+        {
+            rulebookAnimator.SetFloat("multiplier", 1f);
+        }
+        else 
+        {
+            rulebookAnimator.SetFloat("multiplier", 1f);
+            Debug.Log("play new");
+            rulebookAnimator.Play("float", 0, 0f);
+        }
     }
 
     public void RuleHoverReset() 
     {
-        ruleBookAnimator.ResetTrigger("ruleHover");
+        if (rulebookAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime<0.95f)
+        {
+            rulebookAnimator.SetFloat("multiplier", -1f);
+        }
+        else
+        {
+            rulebookAnimator.SetFloat("multiplier", -1f);
+            Debug.Log("play new");
+            rulebookAnimator.Play("float", 0, 1f);
+        }
     }
 
 
@@ -109,4 +130,7 @@ public class MenuControl : MonoBehaviour
         }
         rulebookMat.SetTexture("_Texture2D", rulebookTextures[n]);
     }
+
+    
+    
 }
