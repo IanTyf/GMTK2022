@@ -174,10 +174,12 @@ public class Monster_Turnbase : MonoBehaviour
             //try forward
             transform.position = curPos;
             Debug.Log("Try forward");
-            transform.Translate((curPlayerPosXZ-curPos).normalized*i*.5f,Space.World);
+            transform.Translate((curPlayerPosXZ-curPos).normalized*(i+1)*.1f*monsterChaseSpeed,Space.World);
             if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
             {
-                if (RayDetectHit.transform.tag == "ground"&&SideDetectHit())
+                //D
+                Debug.Log("Hit Name:"+ RayDetectHit.transform.name);
+                if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
                 {
                     Debug.Log("modified move forward successfully");
                     SetOneFrame = false;
@@ -189,10 +191,10 @@ public class Monster_Turnbase : MonoBehaviour
                     //try left
                     transform.position = curPos;
                     Debug.Log("Try left");
-                    transform.Translate(-transform.right*i*.5f,Space.World);
+                    transform.Translate(-transform.right*(i+1)*.1f*monsterChaseSpeed,Space.World);
                     if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
                     {
-                        if (RayDetectHit.transform.tag == "ground"&&SideDetectHit())
+                        if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
                         {
                             Debug.Log("modified move forward successfully");
                             SetOneFrame = false;
@@ -204,10 +206,10 @@ public class Monster_Turnbase : MonoBehaviour
                             //try right
                             transform.position = curPos;
                             Debug.Log("Try right");
-                            transform.Translate(transform.right*i*.5f,Space.World);
+                            transform.Translate(transform.right*(i+1)*.1f*monsterChaseSpeed,Space.World);
                             if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
                             {
-                                if (RayDetectHit.transform.tag == "ground"&&SideDetectHit())
+                                if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
                                 {
                                     Debug.Log("modified move forward successfully");
                                     SetOneFrame = false;
@@ -232,36 +234,42 @@ public class Monster_Turnbase : MonoBehaviour
 
     public bool SideDetectHit()
     {
+        //return true when hit item instead of ground
         RaycastHit RayDetectHit_L,RayDetectHit_R;
         if (Physics.Raycast(DetectRayL.transform.position, Vector3.down, out RayDetectHit_L, Mathf.Infinity))
         {
             if (RayDetectHit_L.transform.tag == "ground")
             {
-                if (Physics.Raycast(DetectRayL.transform.position, Vector3.down, out RayDetectHit_R, Mathf.Infinity))
+                if (Physics.Raycast(DetectRayR.transform.position, Vector3.down, out RayDetectHit_R, Mathf.Infinity))
                 {
-                    if (RayDetectHit_L.transform.tag == "ground")
+                    if (RayDetectHit_R.transform.tag == "ground")
                     {
-                        return true;
+                        //just hit ground
+                        return false;
                     }
                     else
                     {
-                        return false;
+                        //hit item
+                        return true;
 
                     }
                 }
                 else
                 {
-                    return true;
+                    //nothing hitted
+                    return false;
                 }
             }
             else
             {
-                return false;
+                //hit item
+                return true;
             }
         }
         else
         {
-            return true;
+            //nothing hitted
+            return false;
         }
     }
     public void MonsterRound(bool prePlayerExpo, bool curPlayerExpo)
@@ -339,45 +347,51 @@ public class Monster_Turnbase : MonoBehaviour
     }
     public void ChasePlayer()
     {
-        curPos = transform.position;
+        
         
         //normal move
         transform.Translate((curPlayerPosXZ-curPos).normalized*monsterChaseSpeed*1f,Space.World);
 
+        curPos = transform.position;
+        
+        RaycastHit ChasePlayerHit;
         //check hit
-        if (HitObstacle)
+        if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out ChasePlayerHit, Mathf.Infinity))
         {
-            SetOneFrame = true;
-        }
-
-        if (HitObstacle)
-        {
-            RaycastHit hitObstacle;
-            if (Physics.Raycast(transform.position, Vector3.down, out hitObstacle, Mathf.Infinity))
+            if (ChasePlayerHit.transform.tag == "ground")
             {
-                if (hitObstacle.transform.tag != "ground")
+                //check ground
+                if (SideDetectHit())
                 {
-                    //transform.position.y = Height - (Mathf.Abs(transform.position.y - hitObstacle.transform.y ));
-                    //transform.Translate(Vector3.up*(Height - (Mathf.Abs(transform.position.y - hitObstacle.transform.position.y))),Space.World);
+                    //hit something else
+                    SetOneFrame = true;
                 }
+                else
+                {
+                    
+                }
+            }
+            else
+            {
+                //hit something else
+                SetOneFrame = true;
             }
         }
         else
         {
-            //Debug.Log("move successfully");
-            return;
+            //正常走
         }
-        
-
     }
 
+
+    #region OnTriggerChecek
     private void OnTriggerEnter(Collider other)
     {
         if (other != null)
         {
             HitObstacle = true;
         }
-        Debug.Log("OnTriggerEnter"+other.gameObject.name);
+        //Debug.Log("OnTriggerEnter"+other.gameObject.name);
     }
 
     private void OnTriggerStay(Collider other)
@@ -392,8 +406,9 @@ public class Monster_Turnbase : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         HitObstacle = false;
-        Debug.Log("OnTriggerExit"+other.gameObject.name);
+        //Debug.Log("OnTriggerExit"+other.gameObject.name);
     }
+    #endregion
     
 
     public float Dist_player_Monster()
