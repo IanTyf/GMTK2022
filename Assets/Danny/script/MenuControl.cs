@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
 
 
 public class MenuControl : MonoBehaviour
@@ -16,13 +15,12 @@ public class MenuControl : MonoBehaviour
     public Animator rulebookAnimator;
     private int n = 0;
 
-    public CinemachineBrain cinemachineBrain;
-
-
+    public menuCamZoom menuCam;
   
 
 
-    public GameObject vcam1;
+    //public GameObject vcam1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +33,6 @@ public class MenuControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H)) 
         {
             RulebookChange();
-            cinemachineBrain.enabled = true;
         }
     }
 
@@ -59,7 +56,7 @@ public class MenuControl : MonoBehaviour
     public void playClick() 
     {
         changeTex(2);
-        
+        menuCam.Zoom();
     }
 
     public void quitHover()
@@ -120,7 +117,7 @@ public class MenuControl : MonoBehaviour
 
     public void GameBegin() 
     {
-        vcam1.SetActive(false);
+        //vcam1.SetActive(false);
     }
 
     public void RulebookChange() 
