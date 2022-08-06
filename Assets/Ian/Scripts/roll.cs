@@ -38,30 +38,34 @@ public class roll : MonoBehaviour
 
     private float prevSpeed;
 
+    private bool updateRoll;
+
     // Start is called before the first frame update
     void Start()
     {
-        camMovement = camTransform.gameObject.GetComponent<cameraMovement>();
         rb = GetComponent<Rigidbody>();
+        camMovement = camTransform.gameObject.GetComponent<cameraMovement>();
         //rollTimer = 0f;
         playerMode = Mode.Idle;
 
         canMove = true;
+        camTransform.position = transform.position;
         camTransform.Rotate(new Vector3(0f, transform.rotation.eulerAngles.y, 0f), Space.World);
-        camMovement.InitRot();
+        //camMovement.InitRot();
     }
 
     // Update is called once per frame
     void Update()
     {
+        camTransform.position = transform.position;
+        if (!updateRoll) return;
         if (playerMode == Mode.Dead) return;
 
         // sync camera position
-        camTransform.position = transform.position;
 
         if (canMove)
         {
-
+            
             // can roll
             //if (rollTimer == 0f)
             //{
@@ -137,6 +141,15 @@ public class roll : MonoBehaviour
 
         prevSpeed = rb.velocity.magnitude;
         
+    }
+
+    public void enableUpdate()
+    {
+        updateRoll = true;
+        camMovement.InitRot();
+        camMovement.EnableMovement();
+        camTransform.gameObject.GetComponent<Camera>().enabled = true;
+        camTransform.gameObject.GetComponent<AudioListener>().enabled = true;
     }
 
 

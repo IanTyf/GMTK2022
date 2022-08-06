@@ -10,7 +10,7 @@ public class cameraMovement : MonoBehaviour
     private float xRot;
     private float yRot;
 
-
+    private bool enableMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class cameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!enableMovement) return;
 
         float x = Input.GetAxisRaw("Mouse X") * xSens;
         float y = Input.GetAxisRaw("Mouse Y") * ySens;
@@ -40,6 +41,10 @@ public class cameraMovement : MonoBehaviour
         yRot = transform.eulerAngles.y;
     }
 
+    public void EnableMovement()
+    {
+        enableMovement = true;
+    }
     /*
     public void nod(string dir)
     {

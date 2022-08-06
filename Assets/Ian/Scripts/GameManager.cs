@@ -40,8 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
 
         // player dice spawn
         switch (StaticManager.curCheckPoint)

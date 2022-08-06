@@ -15,7 +15,7 @@ public class MenuControl : MonoBehaviour
     public Animator rulebookAnimator;
     private int n = 0;
 
-
+    public menuCamZoom menuCam;
   
 
 
@@ -55,7 +55,7 @@ public class MenuControl : MonoBehaviour
     public void playClick() 
     {
         changeTex(2);
-        
+        menuCam.Zoom();
     }
 
     public void quitHover()
