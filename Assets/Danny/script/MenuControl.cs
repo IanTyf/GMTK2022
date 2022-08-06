@@ -66,6 +66,7 @@ public class MenuControl : MonoBehaviour
     public void quitClick()
     {
         changeTex(4);
+        Application.Quit();
     }
     public void creditHover()
     {
