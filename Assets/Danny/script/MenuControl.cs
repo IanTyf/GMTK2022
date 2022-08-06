@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 
 public class MenuControl : MonoBehaviour
@@ -14,6 +15,8 @@ public class MenuControl : MonoBehaviour
     public Material rulebookMat;
     public Animator rulebookAnimator;
     private int n = 0;
+
+    public CinemachineBrain cinemachineBrain;
 
 
   
@@ -32,6 +35,7 @@ public class MenuControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H)) 
         {
             RulebookChange();
+            cinemachineBrain.enabled = true;
         }
     }
 
