@@ -9,6 +9,7 @@ TagManager:
   - Floor
   - PlayerTrigger
   - standable
+  - ground
   layers:
   - Default
   - TransparentFX
