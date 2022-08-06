@@ -12,6 +12,7 @@ public class TurnbaseController : MonoBehaviour
     public roll playerScript;
     public Monster_Turnbase monsterScript;
     public GameObject painting;
+    public GameObject train;
 
     #endregion
 
@@ -77,6 +78,7 @@ public class TurnbaseController : MonoBehaviour
     {
 
         updatePainting();
+        updateTrain();
 
         /*
          * 怪物根据上一回合玩家的位置行动
@@ -184,6 +186,12 @@ public class TurnbaseController : MonoBehaviour
     private void updatePainting()
     {
         int currentNum = playerScript.number;
-        painting.GetComponent<PaintingSwap>().updateTexture(currentNum - 1);
+        if (painting) painting.GetComponent<PaintingSwap>().updateTexture(currentNum - 1);
+    }
+
+    private void updateTrain()
+    {
+        int currentNum = playerScript.number;
+        if (train) train.GetComponent<Train>().updateTrain(currentNum - 1);
     }
 }
