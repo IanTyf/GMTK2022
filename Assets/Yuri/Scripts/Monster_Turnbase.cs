@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Monster_Turnbase : MonoBehaviour
 {
@@ -44,8 +46,21 @@ public class Monster_Turnbase : MonoBehaviour
     [SerializeField]
     private float testingTimer = 0;
     #endregion
-    
 
+
+    #region Patrolhit
+
+    private Vector3 curPos;
+    [SerializeField] private int stepTry = 1000;
+    [SerializeField] private bool HitObstacle =false;
+    private Vector3 curPlayerPosXZ;
+    private float Height;
+    private float offsetY;
+    [SerializeField] 
+    private bool SetOneFrame;
+
+    public GameObject DetectRay,DetectRayL,DetectRayR;
+    #endregion
     void Start()
     {
         mode_Monster = Mode.Partrol;
@@ -54,61 +69,245 @@ public class Monster_Turnbase : MonoBehaviour
         setNewPoint();
         curIndex = Random.Range(0, navPoints.Count);
         curPoint = navPoints[curIndex];
+
     }
     
     void Update()
     {
+        curPlayerPosXZ.x = player.transform.position.x;
+        curPlayerPosXZ.z = player.transform.position.z;
+        curPlayerPosXZ.y = transform.position.y;
+        
         Debug.DrawRay(transform.position, transform.forward*100,Color.yellow);
-        /*testingTimer -= Time.deltaTime;
-        if (testingTimer < 0)
-        {
-            PatrolByStep();
-            testingTimer = testingTime;
-        }*/
     }
 
+    private void FixedUpdate()
+    {
+        //LookAtPlayer();
+        //transform.Translate(transform.forward*.01f,Space.World);
+        // check has Collision
+        /*if (mode_Monster==Mode.Chase&&SetOneFrame&&HitObstacle)
+        {
+            for (int i = 0; i < stepTry; i++)
+            {
+                transform.position = curPos;
+                Debug.Log("Try forward");
+                //try forward
+                transform.Translate((curPlayerPosXZ-curPos).normalized*i*.5f,Space.World);
+                
+                if (!HitObstacle)
+                {
+                    Debug.Log("modified move forward successfully");
+                    //SetOneFrame = false;
+                    break;
+                }
+                else
+                {
+                    //try left
+                    Debug.Log("Try left");
+
+                    transform.position = curPos;
+                    transform.Translate(-transform.right*i*.5f,Space.World);
+                    if (!HitObstacle)
+                    {
+                        Debug.Log("modified move left successfully");
+                        //SetOneFrame = false;
+                        break;
+                    }
+                    else
+                    {
+                        //try right
+                        
+                        Debug.Log("Try right");
+
+                        transform.position = curPos;
+                        transform.Translate(transform.right*i*.5f,Space.World);
+                        if (!HitObstacle)
+                        {
+                            Debug.Log("modified move right successfully");
+                            //SetOneFrame = false;
+                            break;
+                        }
+                        else
+                        {
+                            //SetOneFrame = false;
+                            Debug.Log("failed");
+                        }
+                    }
+                }
+                //left
+                //right
+            }
+
+            
+        }
+        */
+
+        Debug.DrawRay(DetectRay.transform.position,Vector3.down*100,Color.magenta);
+        Debug.DrawRay(DetectRayL.transform.position,Vector3.down*100,Color.magenta);
+        Debug.DrawRay(DetectRayR.transform.position,Vector3.down*100,Color.magenta);
+        RaycastHit HitBarrier;
+        if (mode_Monster == Mode.Chase && SetOneFrame)
+        {
+            if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out HitBarrier, Mathf.Infinity))
+            {
+                if (HitBarrier.transform.tag == "ground")
+                {
+                    
+                }
+                else
+                {
+                    Debug.Log("Modified Move");
+                    RayDetect();
+                }
+            }
+        }
+    }
+
+    public void RayDetect()
+    {
+        RaycastHit RayDetectHit;
+        //try forward;
+        for (int i = 0; i < stepTry; i++)
+        {
+            #region try forward
+            //try forward
+            transform.position = curPos;
+            Debug.Log("Try forward");
+            transform.Translate((curPlayerPosXZ-curPos).normalized*i*.5f,Space.World);
+            if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
+            {
+                if (RayDetectHit.transform.tag == "ground"&&SideDetectHit())
+                {
+                    Debug.Log("modified move forward successfully");
+                    SetOneFrame = false;
+                    break;
+                }
+                else
+                {
+                    #region TryLeft
+                    //try left
+                    transform.position = curPos;
+                    Debug.Log("Try left");
+                    transform.Translate(-transform.right*i*.5f,Space.World);
+                    if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
+                    {
+                        if (RayDetectHit.transform.tag == "ground"&&SideDetectHit())
+                        {
+                            Debug.Log("modified move forward successfully");
+                            SetOneFrame = false;
+                            break;
+                        }
+                        else
+                        {
+                            #region Try Right
+                            //try right
+                            transform.position = curPos;
+                            Debug.Log("Try right");
+                            transform.Translate(transform.right*i*.5f,Space.World);
+                            if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
+                            {
+                                if (RayDetectHit.transform.tag == "ground"&&SideDetectHit())
+                                {
+                                    Debug.Log("modified move forward successfully");
+                                    SetOneFrame = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    //failed
+                                    
+                                }
+                            }
+                            #endregion
+                        }
+                    }
+                    #endregion
+
+                }
+            }
+            #endregion
+        }
+    }
+
+    public bool SideDetectHit()
+    {
+        RaycastHit RayDetectHit_L,RayDetectHit_R;
+        if (Physics.Raycast(DetectRayL.transform.position, Vector3.down, out RayDetectHit_L, Mathf.Infinity))
+        {
+            if (RayDetectHit_L.transform.tag == "ground")
+            {
+                if (Physics.Raycast(DetectRayL.transform.position, Vector3.down, out RayDetectHit_R, Mathf.Infinity))
+                {
+                    if (RayDetectHit_L.transform.tag == "ground")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
     public void MonsterRound(bool prePlayerExpo, bool curPlayerExpo)
     {
-        //check if player dead
+        /*//check if player dead
         if (Dist_player_Monster() < KillDist)
         {
             //kill player
             player.GetComponent<roll>().playerMode = roll.Mode.Dead;
         }
         else
-        //判断行动
+        
         {
-            //怪物根据玩家的位置行动
-            //上一回合被发现
-            switch (mode_Monster)
-            {
-                case Mode.Partrol:
-                    if (curPlayerExpo)
-                    {
-                        mode_Monster = Mode.Attention;
-                    }
-                    break;
-                case Mode.Attention:
-                    if (curPlayerExpo)
-                    {
-                        mode_Monster = Mode.Chase;
-                    }
-                    else
-                    {
-                        mode_Monster = Mode.Partrol;
-                    }
-                    break;
-                case Mode.Chase:
-                    if (curPlayerExpo)
-                    {
-                        mode_Monster = Mode.Chase;
-                    }
-                    else
-                    {
-                        mode_Monster = Mode.Partrol;
-                    }
-                    break;
-            }
+            
+        }*/
+        //判断行动
+        //怪物根据玩家的位置行动
+        //上一回合被发现
+        switch (mode_Monster)
+        {
+            case Mode.Partrol:
+                if (curPlayerExpo)
+                {
+                    mode_Monster = Mode.Attention;
+                }
+                break;
+            case Mode.Attention:
+                if (curPlayerExpo)
+                {
+                    mode_Monster = Mode.Chase;
+                }
+                else
+                {
+                    mode_Monster = Mode.Partrol;
+                }
+                break;
+            case Mode.Chase:
+                if (curPlayerExpo)
+                {
+                    mode_Monster = Mode.Chase;
+                }
+                else
+                {
+                    mode_Monster = Mode.Partrol;
+                }
+                break;
         }
         
         //execute monster behavior
@@ -123,19 +322,80 @@ public class Monster_Turnbase : MonoBehaviour
                 PatrolByStep();
                 break;
             case Mode.Chase:
+                LookAtPlayer();
                 ChasePlayer();
                 break;
+        }
+        if (Dist_player_Monster() < KillDist)
+        {
+            //kill player
+            player.GetComponent<roll>().playerMode = roll.Mode.Dead;
         }
     }
 
     public void LookAtPlayer()
     {
-        transform.LookAt(player.transform.position);
+        transform.LookAt(curPlayerPosXZ);
     }
     public void ChasePlayer()
     {
-        transform.Translate((player.transform.position-transform.position).normalized*monsterChaseSpeed*1f,Space.World);
+        curPos = transform.position;
+        
+        //normal move
+        transform.Translate((curPlayerPosXZ-curPos).normalized*monsterChaseSpeed*1f,Space.World);
+
+        //check hit
+        if (HitObstacle)
+        {
+            SetOneFrame = true;
+        }
+
+        if (HitObstacle)
+        {
+            RaycastHit hitObstacle;
+            if (Physics.Raycast(transform.position, Vector3.down, out hitObstacle, Mathf.Infinity))
+            {
+                if (hitObstacle.transform.tag != "ground")
+                {
+                    //transform.position.y = Height - (Mathf.Abs(transform.position.y - hitObstacle.transform.y ));
+                    //transform.Translate(Vector3.up*(Height - (Mathf.Abs(transform.position.y - hitObstacle.transform.position.y))),Space.World);
+                }
+            }
+        }
+        else
+        {
+            //Debug.Log("move successfully");
+            return;
+        }
+        
+
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other != null)
+        {
+            HitObstacle = true;
+        }
+        Debug.Log("OnTriggerEnter"+other.gameObject.name);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other != null)
+        {
+           HitObstacle = true;
+        }
+        //Debug.Log("OnTriggerStay"+other.gameObject.name);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        HitObstacle = false;
+        Debug.Log("OnTriggerExit"+other.gameObject.name);
+    }
+    
+
     public float Dist_player_Monster()
     {
         return Vector3.Distance(transform.position, player.transform.position);
@@ -147,14 +407,14 @@ public class Monster_Turnbase : MonoBehaviour
         {
             transform.LookAt(curPoint.transform.position);
             transform.Translate((curPoint.transform.position-transform.position).normalized*1*monsterSpeed,Space.World);
-            Debug.Log(curPoint.transform.position);
+            //Debug.Log(curPoint.transform.position);
         }
         else
         {
             transform.LookAt(curPoint.transform.position);
             transform.position = curPoint.transform.position;
             setNewPoint();
-            Debug.Log("Switch point");
+            //Debug.Log("Switch point");
         }
         //transform.position = navPoints[(int) Random.Range(0,navPoints.Count)].transform.position;
     }
@@ -167,7 +427,7 @@ public class Monster_Turnbase : MonoBehaviour
             newIndex = (int)Random.Range(0, navPoints.Count);
         }*/
         
-        if (curIndex < navPoints.Count)
+        if (curIndex < navPoints.Count - 1)
         {
             curIndex++;
         }
@@ -211,7 +471,7 @@ public class Monster_Turnbase : MonoBehaviour
         if (Physics.Raycast(transform.position, player.transform.position-transform.position, out coneHit, Mathf.Infinity))
         {
             //hit 到 夹角<15 >-15
-            Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
+            //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
             if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 25
                 ||
                 Vector3.Angle(player.transform.position - transform.position, transform.forward) > 335)
