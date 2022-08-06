@@ -11,6 +11,7 @@ public class TurnbaseController : MonoBehaviour
     public GameObject Monster;
     public roll playerScript;
     public Monster_Turnbase monsterScript;
+    public GameObject painting;
 
     #endregion
 
@@ -74,6 +75,9 @@ public class TurnbaseController : MonoBehaviour
     //execute when player finished one move// player speed = 0 
     public void newTurn()
     {
+
+        updatePainting();
+
         /*
          * 怪物根据上一回合玩家的位置行动
          * 记录这一回合玩家的信息
@@ -175,5 +179,11 @@ public class TurnbaseController : MonoBehaviour
         
 
 
+    }
+
+    private void updatePainting()
+    {
+        int currentNum = playerScript.number;
+        painting.GetComponent<PaintingSwap>().updateTexture(currentNum - 1);
     }
 }

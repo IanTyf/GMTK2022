@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public enum CheckPoint
+{
+    Desk, Counter, Bed, Floor
+}
+
 public class GameManager : MonoBehaviour
 {
     public roll playerRoll;
@@ -31,11 +36,36 @@ public class GameManager : MonoBehaviour
 
     public ExitRoom er;
 
+    public GameObject checkPoints;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        // player dice spawn
+        switch (StaticManager.curCheckPoint)
+        {
+            case CheckPoint.Desk:
+                playerRoll.gameObject.transform.position = checkPoints.transform.GetChild(0).position;
+                playerRoll.gameObject.transform.rotation = checkPoints.transform.GetChild(0).rotation;
+                break;
+            case CheckPoint.Counter:
+                playerRoll.gameObject.transform.position = checkPoints.transform.GetChild(1).position;
+                playerRoll.gameObject.transform.rotation = checkPoints.transform.GetChild(1).rotation;
+                break;
+            case CheckPoint.Bed:
+                playerRoll.gameObject.transform.position = checkPoints.transform.GetChild(2).position;
+                playerRoll.gameObject.transform.rotation = checkPoints.transform.GetChild(2).rotation;
+                break;
+            case CheckPoint.Floor:
+                playerRoll.gameObject.transform.position = checkPoints.transform.GetChild(3).position;
+                playerRoll.gameObject.transform.rotation = checkPoints.transform.GetChild(3).rotation;
+                break;
+        }
+
+
+        // broken dice spawn
         for (int i=0; i<spawnPoints.Length; i++)
         {
             if (i<StaticManager.deathCount)
@@ -52,7 +82,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ambient = GameObject.Find("AmbientSound").GetComponent<AudioSource>();
+        GameObject AS = GameObject.Find("AmbientSound");
+        if (AS) ambient = AS.GetComponent<AudioSource>();
+        //ambient = GameObject.Find("AmbientSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -123,6 +155,8 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        /*
         if (StaticManager.deathCount < 5)
         {
             StaticManager.deathCount++;
@@ -136,6 +170,7 @@ public class GameManager : MonoBehaviour
             // go to fourth scene
             SceneManager.LoadScene("Scene_Lost");
         }
+        */
     }
 
     public void blackInFive()
@@ -146,7 +181,7 @@ public class GameManager : MonoBehaviour
     public void blackScreenAndGoToMainMenu()
     {
         er.increaseAmbient = false;
-        ambient.volume = 0f;
+        if (ambient) ambient.volume = 0f;
         glitchEffect.glitchStrength = 0f;
         heartBeat.volume = 0f;
         overlay.GetComponent<Animator>().SetTrigger("black");

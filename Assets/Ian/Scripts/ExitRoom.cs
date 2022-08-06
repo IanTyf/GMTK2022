@@ -18,7 +18,9 @@ public class ExitRoom : MonoBehaviour
         exited = false;
         increaseAmbient = false;
 
-        ambientSound = GameObject.Find("AmbientSound").GetComponent<AudioSource>();
+        GameObject AS = GameObject.Find("AmbientSound");
+        if (AS) ambientSound = AS.GetComponent<AudioSource>();
+        //ambientSound = GameObject.Find("AmbientSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

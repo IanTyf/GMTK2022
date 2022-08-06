@@ -15,6 +15,8 @@ public class roll : MonoBehaviour
         Idle, MakeSound, Dead
     }
 
+    public int number;
+    public LayerMask coverLayer;
 
     public Transform camTransform;
     private cameraMovement camMovement;
@@ -31,6 +33,8 @@ public class roll : MonoBehaviour
 
     public bool canMove;
 
+    public bool canNewFrame;
+    public float newFrameOffset;
 
     private float prevSpeed;
 
@@ -43,6 +47,8 @@ public class roll : MonoBehaviour
         playerMode = Mode.Idle;
 
         canMove = true;
+        camTransform.Rotate(new Vector3(0f, transform.rotation.eulerAngles.y, 0f), Space.World);
+        camMovement.InitRot();
     }
 
     // Update is called once per frame
@@ -113,15 +119,53 @@ public class roll : MonoBehaviour
 
         }
 
-        if (rb.velocity.magnitude == 0f && prevSpeed > 0)
+        if (rb.velocity.magnitude < newFrameOffset && prevSpeed > rb.velocity.magnitude && canNewFrame)
         {
             // new frame
             Debug.Log("new frame");
+            updateNumber();
             turnbaseController.newTurn();
-            canMove = true;
+            canNewFrame = false;
         }
+
+        if (rb.velocity.magnitude == 0f && prevSpeed > 0)
+        {
+            canMove = true;
+            canNewFrame = true;
+        }
+
 
         prevSpeed = rb.velocity.magnitude;
         
+    }
+
+
+    private void updateNumber()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1f, coverLayer))
+        {
+            switch (hit.transform.gameObject.name)
+            {
+                case "Right":
+                    number = 4;
+                    break;
+                case "Left":
+                    number = 3;
+                    break;
+                case "Forward":
+                    number = 5;
+                    break;
+                case "Back":
+                    number = 2;
+                    break;
+                case "Up":
+                    number = 6;
+                    break;
+                case "Down":
+                    number = 1;
+                    break;
+            }
+        }
     }
 }
