@@ -12,6 +12,7 @@ public class Monster_Turnbase : MonoBehaviour
     public GameObject player;
     public GameManager gm;
     public LayerMask coverDetect;
+    public MonsterMesh monsterMesh;
     #endregion
     
     #region Monster Property
@@ -20,7 +21,9 @@ public class Monster_Turnbase : MonoBehaviour
     [SerializeField]
     private float monsterChaseSpeed;
     [SerializeField]
-    public float KillDist =3f;
+    public float KillDist =1f;
+    [SerializeField]
+    public float CloseDist = 5f;
     #endregion
 
     #region Behaviors
@@ -324,19 +327,31 @@ public class Monster_Turnbase : MonoBehaviour
             case Mode.Idle:
                 break;
             case Mode.Attention:
+                monsterMesh.updateAttentionState(transform.forward, curPlayerPosXZ - transform.position);
                 LookAtPlayer();
                 break;
             case Mode.Partrol:
+                monsterMesh.updatePatrolState();
                 PatrolByStep();
                 break;
             case Mode.Chase:
                 LookAtPlayer();
                 ChasePlayer();
+                LookAtPlayer();
+
+                monsterMesh.updateChaseNormalState();
                 break;
         }
-        if (Dist_player_Monster() < KillDist)
+        if (Dist_player_Monster() < CloseDist && mode_Monster == Mode.Chase)
+        {
+            monsterMesh.updateChaseCloseState();
+        }
+
+        if (Dist_player_Monster() < KillDist  && mode_Monster == Mode.Chase)
         {
             //kill player
+            // TODO: manually set monster position
+            monsterMesh.updateChaseDeadState();
             player.GetComponent<roll>().playerMode = roll.Mode.Dead;
         }
     }
