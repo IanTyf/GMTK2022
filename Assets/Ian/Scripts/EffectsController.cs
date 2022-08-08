@@ -65,7 +65,7 @@ public class EffectsController : MonoBehaviour
         {
             chaseStartDist = monster.Dist_player_Monster();
         }
-        else if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol)
+        else if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol||monster.mode_Monster == Monster_Turnbase.Mode.Idle)
         {
             chaseStartDist = -1f;
         }
@@ -130,7 +130,7 @@ public class EffectsController : MonoBehaviour
         {
             chaseStartDist = monster.Dist_player_Monster();
         }
-        else if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol)
+        else if (monster.mode_Monster == Monster_Turnbase.Mode.Partrol||monster.mode_Monster == Monster_Turnbase.Mode.Idle)
         {
             chaseStartDist = -1f;
         }

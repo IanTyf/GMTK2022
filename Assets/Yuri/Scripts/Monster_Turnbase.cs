@@ -24,8 +24,15 @@ public class Monster_Turnbase : MonoBehaviour
     public float KillDist =1f;
     [SerializeField]
     public float CloseDist = 5f;
+
+    private Vector3 IdlePos;
     #endregion
 
+    #region Level_Desk
+
+    private bool onDesk = true;
+
+    #endregion
     #region Behaviors
     public enum Mode
     {
@@ -66,7 +73,8 @@ public class Monster_Turnbase : MonoBehaviour
     #endregion
     void Start()
     {
-        mode_Monster = Mode.Partrol;
+        IdlePos = transform.position;
+        mode_Monster = Mode.Idle;
         testingTimer = testingTime;
         
         setNewPoint();
@@ -87,66 +95,6 @@ public class Monster_Turnbase : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //LookAtPlayer();
-        //transform.Translate(transform.forward*.01f,Space.World);
-        // check has Collision
-        /*if (mode_Monster==Mode.Chase&&SetOneFrame&&HitObstacle)
-        {
-            for (int i = 0; i < stepTry; i++)
-            {
-                transform.position = curPos;
-                Debug.Log("Try forward");
-                //try forward
-                transform.Translate((curPlayerPosXZ-curPos).normalized*i*.5f,Space.World);
-                
-                if (!HitObstacle)
-                {
-                    Debug.Log("modified move forward successfully");
-                    //SetOneFrame = false;
-                    break;
-                }
-                else
-                {
-                    //try left
-                    Debug.Log("Try left");
-
-                    transform.position = curPos;
-                    transform.Translate(-transform.right*i*.5f,Space.World);
-                    if (!HitObstacle)
-                    {
-                        Debug.Log("modified move left successfully");
-                        //SetOneFrame = false;
-                        break;
-                    }
-                    else
-                    {
-                        //try right
-                        
-                        Debug.Log("Try right");
-
-                        transform.position = curPos;
-                        transform.Translate(transform.right*i*.5f,Space.World);
-                        if (!HitObstacle)
-                        {
-                            Debug.Log("modified move right successfully");
-                            //SetOneFrame = false;
-                            break;
-                        }
-                        else
-                        {
-                            //SetOneFrame = false;
-                            Debug.Log("failed");
-                        }
-                    }
-                }
-                //left
-                //right
-            }
-
-            
-        }
-        */
-
         Debug.DrawRay(DetectRay.transform.position,Vector3.down*100,Color.magenta);
         Debug.DrawRay(DetectRayL.transform.position,Vector3.down*100,Color.magenta);
         Debug.DrawRay(DetectRayR.transform.position,Vector3.down*100,Color.magenta);
@@ -284,6 +232,12 @@ public class Monster_Turnbase : MonoBehaviour
         //上一回合被发现
         switch (mode_Monster)
         {
+            case Mode.Idle:
+                if (curPlayerExpo)
+                {
+                    mode_Monster = Mode.Attention;
+                }
+                break;
             case Mode.Partrol:
                 if (curPlayerExpo)
                 {
@@ -297,7 +251,16 @@ public class Monster_Turnbase : MonoBehaviour
                 }
                 else
                 {
-                    mode_Monster = Mode.Partrol;
+                    if (onDesk)
+                    {
+                        transform.position = IdlePos;
+                        mode_Monster = Mode.Idle;
+                    }
+                    else
+                    {
+                        mode_Monster = Mode.Partrol;
+                    }
+
                 }
                 break;
             case Mode.Chase:
@@ -307,7 +270,15 @@ public class Monster_Turnbase : MonoBehaviour
                 }
                 else
                 {
-                    mode_Monster = Mode.Partrol;
+                    if (onDesk)
+                    {
+                        transform.position = IdlePos;
+                        mode_Monster = Mode.Idle;
+                    }
+                    else
+                    {
+                        mode_Monster = Mode.Partrol;
+                    }
                 }
                 break;
         }
