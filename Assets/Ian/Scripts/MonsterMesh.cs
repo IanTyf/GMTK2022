@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MonsterMesh : MonoBehaviour
 {
@@ -88,19 +90,20 @@ public class MonsterMesh : MonoBehaviour
 
     private void disableAll()
     {
-        transform.rotation = Quaternion.identity;
+        //transform.rotation = Quaternion.identity;
+        transform.localRotation = quaternion.identity;
 
         for (int i=0; i<patrolStates.childCount; i++)
         {
-            patrolStates.GetChild(i).gameObject.SetActive(true);
+            patrolStates.GetChild(i).gameObject.SetActive(false);
         }
         for (int i = 0; i < attentionStates.childCount; i++)
         {
-            attentionStates.GetChild(i).gameObject.SetActive(true);
+            attentionStates.GetChild(i).gameObject.SetActive(false);
         }
         for (int i = 0; i < chaseStates.childCount; i++)
         {
-            chaseStates.GetChild(i).gameObject.SetActive(true);
+            chaseStates.GetChild(i).gameObject.SetActive(false);
         }
     }
 }
