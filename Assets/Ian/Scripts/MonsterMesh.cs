@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class MonsterMesh : MonoBehaviour
 {
-    public Mesh[] patrolStates;
-    public Mesh[] attentionStates; // 0 is front, 1 is left, 2 is right
-    public Mesh[] chaseStates;
+    private Transform patrolStates;
+    private Transform attentionStates; // 0 is front, 1 is left, 2 is right
+    private Transform chaseStates;
 
-    public float attentionAngleOffset;
+    public float shortTurnOffset;
+    public float largeTurnOffset;
 
-    private MeshFilter mf;
     // Start is called before the first frame update
     void Start()
     {
-        mf = GetComponent<MeshFilter>();
+        patrolStates = transform.GetChild(0);
+        attentionStates = transform.GetChild(1);
+        chaseStates = transform.GetChild(2);
     }
 
     // Update is called once per frame
@@ -25,45 +27,80 @@ public class MonsterMesh : MonoBehaviour
 
     public void updatePatrolState()
     {
-        mf.mesh = patrolStates[Random.Range(0, patrolStates.Length)];
+        disableAll();
+        patrolStates.GetChild(Random.Range(0, patrolStates.childCount)).gameObject.SetActive(true);
     }
 
-    public int updateAttentionState(Vector3 curLookDir, Vector3 playerDir)
+    public void updateAttentionState(Vector3 curLookDir, Vector3 playerDir)
     {
+        disableAll();
         float turnAngle = Vector3.SignedAngle(curLookDir, playerDir, Vector3.up);
         if (Mathf.Abs(turnAngle) < 25f)
         {
             // turn front
-            mf.mesh = attentionStates[0];
-            return 0;
+            attentionStates.GetChild(0).gameObject.SetActive(true);
         }
-        else if (turnAngle < 0)
+        else if (Mathf.Abs(turnAngle) < 90f)
         {
-            // turn right
-            mf.mesh = attentionStates[1];
-            return 1;
+            if (turnAngle > 0) 
+            {
+                transform.Rotate(new Vector3(0f, shortTurnOffset, 0f));
+                attentionStates.GetChild(2).gameObject.SetActive(true);
+            }
+            else
+            {
+                transform.Rotate(new Vector3(0f, -shortTurnOffset, 0f));
+                attentionStates.GetChild(4).gameObject.SetActive(true);
+            }
         }
         else
         {
-            // turn left
-            mf.mesh = attentionStates[2];
-            return 2;
+            if (turnAngle > 0)
+            {
+                transform.Rotate(new Vector3(0f, largeTurnOffset, 0f));
+                attentionStates.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                transform.Rotate(new Vector3(0f, -largeTurnOffset, 0f));
+                attentionStates.GetChild(3).gameObject.SetActive(true);
+            }
         }
-        //mf.mesh = 
     }
 
     public void updateChaseNormalState()
     {
-        mf.mesh = chaseStates[0];
+        disableAll();
+        chaseStates.GetChild(Random.Range(0, 2)).gameObject.SetActive(true);
     }
 
     public void updateChaseCloseState()
     {
-        mf.mesh = chaseStates[1];
+        disableAll();
+        chaseStates.GetChild(2).gameObject.SetActive(true);
     }
     
     public void updateChaseDeadState()
     {
-        mf.mesh = chaseStates[2];
+        disableAll();
+        chaseStates.GetChild(3).gameObject.SetActive(true);
+    }
+
+    private void disableAll()
+    {
+        transform.rotation = Quaternion.identity;
+
+        for (int i=0; i<patrolStates.childCount; i++)
+        {
+            patrolStates.GetChild(i).gameObject.SetActive(true);
+        }
+        for (int i = 0; i < attentionStates.childCount; i++)
+        {
+            attentionStates.GetChild(i).gameObject.SetActive(true);
+        }
+        for (int i = 0; i < chaseStates.childCount; i++)
+        {
+            chaseStates.GetChild(i).gameObject.SetActive(true);
+        }
     }
 }
