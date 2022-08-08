@@ -13,6 +13,7 @@ public class TurnbaseController : MonoBehaviour
     public Monster_Turnbase monsterScript;
     public GameObject painting;
     public GameObject train;
+    public GameObject lights;
 
     #endregion
 
@@ -79,6 +80,7 @@ public class TurnbaseController : MonoBehaviour
 
         updatePainting();
         updateTrain();
+        updateLight();
 
         /*
          * 怪物根据上一回合玩家的位置行动
@@ -193,5 +195,10 @@ public class TurnbaseController : MonoBehaviour
     {
         int currentNum = playerScript.number;
         if (train) train.GetComponent<Train>().updateTrain(currentNum - 1);
+    }
+
+    private void updateLight()
+    {
+        if (lights) lights.GetComponent<BedLightSwitch>().ChangeLight();
     }
 }

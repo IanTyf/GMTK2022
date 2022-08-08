@@ -72,6 +72,7 @@ public class Monster_Turnbase : MonoBehaviour
         setNewPoint();
         curIndex = Random.Range(0, navPoints.Count);
         curPoint = navPoints[curIndex];
+        curPos = transform.position;
 
     }
     
@@ -149,21 +150,11 @@ public class Monster_Turnbase : MonoBehaviour
         Debug.DrawRay(DetectRay.transform.position,Vector3.down*100,Color.magenta);
         Debug.DrawRay(DetectRayL.transform.position,Vector3.down*100,Color.magenta);
         Debug.DrawRay(DetectRayR.transform.position,Vector3.down*100,Color.magenta);
-        RaycastHit HitBarrier;
+        //RaycastHit HitBarrier;
         if (mode_Monster == Mode.Chase && SetOneFrame)
         {
-            if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out HitBarrier, Mathf.Infinity))
-            {
-                if (HitBarrier.transform.tag == "ground")
-                {
-                    
-                }
-                else
-                {
-                    Debug.Log("Modified Move");
-                    RayDetect();
-                }
-            }
+            Debug.Log("Modified Move");
+            RayDetect();
         }
     }
 
@@ -441,12 +432,13 @@ public class Monster_Turnbase : MonoBehaviour
         }
         else
         {
-            transform.LookAt(curPoint.transform.position);
             transform.position = curPoint.transform.position;
             setNewPoint();
+            transform.LookAt(curPoint.transform.position);
             //Debug.Log("Switch point");
         }
         //transform.position = navPoints[(int) Random.Range(0,navPoints.Count)].transform.position;
+        curPos = transform.position;
     }
     
     void setNewPoint()
@@ -471,19 +463,19 @@ public class Monster_Turnbase : MonoBehaviour
     {
         RaycastHit hit;
         //walking
-        if (Physics.Raycast(transform.position, player.transform.position-transform.position,out hit,Mathf.Infinity))
+        if (Physics.Raycast(DetectRay.transform.position, player.transform.position- DetectRay.transform.position,out hit,Mathf.Infinity))
         {
             //Debug.Log(hit.transform.name);
             //Debug.Log(Vector3.Distance(transform.position,player.transform.position));
             if (hit.transform.tag == "Player")
             {
-                Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.red);
+                Debug.DrawRay(DetectRay.transform.position, player.transform.position- DetectRay.transform.position,Color.red);
                 //Debug.Log("moving");
                 return true;
             }
             else
             {
-                Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.green);
+                Debug.DrawRay(DetectRay.transform.position, player.transform.position- DetectRay.transform.position,Color.green);
                 //Debug.Log("stop");
                 return false;
             }
@@ -498,7 +490,7 @@ public class Monster_Turnbase : MonoBehaviour
     public bool PatrolDetectPlayer()
     {
         RaycastHit coneHit;
-        if (Physics.Raycast(transform.position, player.transform.position-transform.position, out coneHit, Mathf.Infinity))
+        if (Physics.Raycast(DetectRay.transform.position, player.transform.position- DetectRay.transform.position, out coneHit, Mathf.Infinity))
         {
             //hit 到 夹角<15 >-15
             //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
