@@ -6,6 +6,9 @@ public class BedLightSwitch : MonoBehaviour
 {
     public GameObject player;
 
+    public Material[] mats;
+    public Material defaultMat;
+
     public int currentInd;
 
     // Start is called before the first frame update
@@ -40,8 +43,16 @@ public class BedLightSwitch : MonoBehaviour
             ind = ind + 1 >= transform.childCount ? ind : ind + 1;
             ind = ind + 1 >= transform.childCount ? ind : ind + 1;
 
-            if (currentInd != -1) transform.GetChild(currentInd).gameObject.GetComponent<Light>().enabled = false;
+            if (currentInd != -1)
+            {
+                transform.GetChild(currentInd).gameObject.GetComponent<MeshRenderer>().material = defaultMat;
+                transform.GetChild(currentInd).gameObject.GetComponent<Light>().enabled = false;
+            }
+
+
             transform.GetChild(ind).gameObject.GetComponent<Light>().enabled = true;
+            transform.GetChild(ind).gameObject.GetComponent<MeshRenderer>().material = mats[Random.Range(0, mats.Length)];
+
             currentInd = ind;
 
         }
