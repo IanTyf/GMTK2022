@@ -166,7 +166,7 @@ public class TurnbaseController : MonoBehaviour
         
         
         //if chase mode 有没有掩体挡住
-        if (monsterScript.mode_Monster != Monster_Turnbase.Mode.Partrol)
+        if (monsterScript.mode_Monster != Monster_Turnbase.Mode.Partrol&&monsterScript.mode_Monster != Monster_Turnbase.Mode.Idle)
         {
             //有掩体挡住
             if (monsterScript.DetectPlayer())
