@@ -12,6 +12,8 @@ public class EffectsController : MonoBehaviour
     
     public Monster_Turnbase monster;
 
+    public GameManager gm;
+
     private bool footStepPlayed;
 
     private float chaseStartDist;
@@ -30,6 +32,7 @@ public class EffectsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gm.GameStarted) return;
 
         // enemy sounds
         #region enemy sounds

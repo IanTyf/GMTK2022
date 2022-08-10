@@ -59,4 +59,15 @@ public class GlitchEffect : MonoBehaviour
     {
         mat.SetFloat("_Strength", 0f);
     }
+
+    public void glitchForSeconds(float strength, float seconds)
+    {
+        glitchStrength = strength;
+        Invoke("disableGlitch", seconds);
+    }
+
+    private void disableGlitch()
+    {
+        glitchStrength = 0f;
+    }
 }

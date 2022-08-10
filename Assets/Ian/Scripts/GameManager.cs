@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject checkPoints;
 
+    public bool GameStarted;
+
     private void Awake()
     {
         //Cursor.lockState = CursorLockMode.Locked;

@@ -16,8 +16,10 @@ public class MenuControl : MonoBehaviour
     private int n = 0;
 
     public menuCamZoom menuCam;
-  
 
+    public MenuEnemy menuEnemy;
+
+    public GameManager gm;
 
     //public GameObject vcam1;
 
@@ -51,17 +53,21 @@ public class MenuControl : MonoBehaviour
     public void playHover() 
     {
         changeTex(1);
+        if (menuEnemy) menuEnemy.Teleport();
     }
 
     public void playClick() 
     {
         changeTex(2);
+        gm.GameStarted = true;
         menuCam.Zoom();
+        if (menuEnemy) menuEnemy.Disappear();
     }
 
     public void quitHover()
     {
         changeTex(3);
+        if (menuEnemy) menuEnemy.Teleport();
     }
 
     public void quitClick()
@@ -72,6 +78,7 @@ public class MenuControl : MonoBehaviour
     public void creditHover()
     {
         changeTex(5);
+        if (menuEnemy) menuEnemy.Teleport();
     }
 
     public void creditClick()
@@ -93,6 +100,7 @@ public class MenuControl : MonoBehaviour
             Debug.Log("play new");
             rulebookAnimator.Play("float", 0, 0f);
         }
+        //if (menuEnemy) menuEnemy.Teleport();
     }
 
     public void RuleHoverReset() 
