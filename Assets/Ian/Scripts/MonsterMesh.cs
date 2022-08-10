@@ -88,6 +88,12 @@ public class MonsterMesh : MonoBehaviour
         chaseStates.GetChild(3).gameObject.SetActive(true);
     }
 
+    public void updateIdleState()
+    {
+        disableAll();
+        patrolStates.GetChild(0).gameObject.SetActive(true);
+    }
+
     private void disableAll()
     {
         //transform.rotation = Quaternion.identity;

@@ -25,7 +25,8 @@ public class Monster_Turnbase : MonoBehaviour
     [SerializeField]
     public float CloseDist = 5f;
 
-    private Vector3 IdlePos;
+    private Vector3 idlePos;
+    private Vector3 idleRot;
     #endregion
 
     #region Level_Desk
@@ -73,14 +74,20 @@ public class Monster_Turnbase : MonoBehaviour
     #endregion
     void Start()
     {
-        IdlePos = transform.position;
+        idlePos = transform.position;
+        idleRot = transform.rotation.eulerAngles;
         mode_Monster = Mode.Idle;
         testingTimer = testingTime;
+
+        if (mode_Monster == Mode.Partrol)
+        {
+            setNewPoint();
+            curIndex = Random.Range(0, navPoints.Count);
+            curPoint = navPoints[curIndex];
+        }
         
-        setNewPoint();
-        curIndex = Random.Range(0, navPoints.Count);
-        curPoint = navPoints[curIndex];
         curPos = transform.position;
+        Debug.Log("start pos: "+ curPos);
 
     }
     
@@ -91,6 +98,8 @@ public class Monster_Turnbase : MonoBehaviour
         curPlayerPosXZ.y = transform.position.y;
         
         Debug.DrawRay(transform.position, transform.forward*100,Color.yellow);
+        
+        //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
     }
 
     private void FixedUpdate()
@@ -253,7 +262,9 @@ public class Monster_Turnbase : MonoBehaviour
                 {
                     if (onDesk)
                     {
-                        transform.position = IdlePos;
+                        transform.position = idlePos;
+                        transform.rotation = Quaternion.identity;
+                        transform.Rotate(idleRot,Space.Self);
                         mode_Monster = Mode.Idle;
                     }
                     else
@@ -272,8 +283,10 @@ public class Monster_Turnbase : MonoBehaviour
                 {
                     if (onDesk)
                     {
-                        transform.position = IdlePos;
+                        transform.position = idlePos;
                         mode_Monster = Mode.Idle;
+                        transform.rotation = Quaternion.identity;
+                        transform.Rotate(idleRot,Space.Self);
                     }
                     else
                     {
@@ -287,6 +300,7 @@ public class Monster_Turnbase : MonoBehaviour
         switch (mode_Monster)
         {
             case Mode.Idle:
+                monsterMesh.updateIdleState();
                 break;
             case Mode.Attention:
                 monsterMesh.updateAttentionState(transform.forward, curPlayerPosXZ - transform.position);
@@ -328,6 +342,7 @@ public class Monster_Turnbase : MonoBehaviour
         
         //normal move
         transform.Translate((curPlayerPosXZ-curPos).normalized*monsterChaseSpeed*1f,Space.World);
+        Debug.Log("CurPos: "+curPos);
 
         curPos = transform.position;
         
@@ -464,15 +479,13 @@ public class Monster_Turnbase : MonoBehaviour
         if (Physics.Raycast(DetectRay.transform.position, player.transform.position- DetectRay.transform.position, out coneHit, Mathf.Infinity))
         {
             //hit 到 夹角<15 >-15
-            //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
-            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 25
-                ||
-                Vector3.Angle(player.transform.position - transform.position, transform.forward) > 335)
+            Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
+            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 30)
             {
                 if (coneHit.transform.tag == "Player")
                 {
                     Debug.DrawRay(transform.position, player.transform.position-transform.position,Color.blue);
-                    //Debug.Log("moving");
+                    Debug.Log("moving");
                     return true;
                 }
                 else
