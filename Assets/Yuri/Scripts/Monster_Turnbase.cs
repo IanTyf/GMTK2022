@@ -352,8 +352,10 @@ public class Monster_Turnbase : MonoBehaviour
             //kill player
             // TODO: manually set monster position
             //transform.Translate((curPlayerPosXZ - curPos).normalized * (Dist_player_Monster() - KillOffset), Space.World);
-            transform.position = new Vector3(curPlayerPosXZ.x, transform.position.y, curPlayerPosXZ.z) + new Vector3(curPos.x - curPlayerPosXZ.x, 0f, curPos.z - curPlayerPosXZ.z).normalized * KillOffset;
-            LookAtPlayer();
+            transform.position = new Vector3(curPlayerPosXZ.x, transform.position.y, curPlayerPosXZ.z) + new Vector3(transform.position.x - curPlayerPosXZ.x, 0f, transform.position.z - curPlayerPosXZ.z).normalized * KillOffset;
+            //+ new Vector3(curPos.x - curPlayerPosXZ.x, 0f, curPos.z - curPlayerPosXZ.z).normalized * KillOffset;
+            //LookAtPlayer();
+            transform.position = transform.position + transform.right * 0.2f;
 
             monsterMesh.updateChaseDeadState();
             player.GetComponent<roll>().playerMode = roll.Mode.Dead;
