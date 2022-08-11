@@ -42,29 +42,42 @@ public class PlayerDropSound : MonoBehaviour
 
         if (oldName.Equals(currentSurface)) return;
 
-        if (!currentSurface.Equals("Desk")) monster.onDesk = false;
-
         switch (currentSurface)
         {
             case "Desk":
                 updateVolumeAndPitch(0.10f, 0.8f);
                 updateSound(deskRollSound);
+                monster.onDesk = true;
+                monster.onCounter = false;
+                monster.onFloor = false;
                 break;
             case "Floor":
                 updateVolumeAndPitch(0.10f, 0.8f);
                 updateSound(deskRollSound);
+                monster.onDesk = false;
+                monster.onCounter = false;
+                monster.onFloor = true;
                 break;
             case "Counter":
                 updateVolumeAndPitch(0.8f, 1.24f);
                 updateSound(carpetRollSound);
+                monster.onDesk = false;
+                monster.onCounter = true;
+                monster.onFloor = false;
                 break;
             case "Carpet":
                 updateVolumeAndPitch(0.8f, 1.24f);
                 updateSound(carpetRollSound);
+                monster.onDesk = false;
+                monster.onCounter = false;
+                monster.onFloor = true;
                 break;
             case "Bed":
                 updateVolumeAndPitch(0.8f, 1.24f);
                 updateSound(carpetRollSound);
+                monster.onDesk = false;
+                monster.onCounter = true;
+                monster.onFloor = false;
                 break;
         }
 

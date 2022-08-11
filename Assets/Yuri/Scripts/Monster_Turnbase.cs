@@ -274,7 +274,9 @@ public class Monster_Turnbase : MonoBehaviour
                     {
                         mode_Monster = Mode.Chase;
                     }
-                    else
+                    
+                    //player on counter
+                    if (onCounter)
                     {
                         mode_Monster = Mode.Idle;
                     }
@@ -283,10 +285,6 @@ public class Monster_Turnbase : MonoBehaviour
                     if (onFloor)
                     {
                         mode_Monster = Mode.Chase;
-                    }
-                    else
-                    {
-                        
                     }
                 }
                 else
@@ -298,19 +296,16 @@ public class Monster_Turnbase : MonoBehaviour
                         transform.Rotate(idleRot,Space.Self);
                         mode_Monster = Mode.Idle;
                     }
-                    else
+                    
+                    if (onCounter)
                     {
-                        mode_Monster = Mode.Partrol;
+                        mode_Monster = Mode.Idle;
                     }
                     
                     //player on floor
                     if (onFloor)
                     {
                         mode_Monster = Mode.Partrol;
-                    }
-                    else
-                    {
-                        
                     }
 
                 }
@@ -323,12 +318,13 @@ public class Monster_Turnbase : MonoBehaviour
                     {
                         mode_Monster = Mode.Chase;
                     }
-                    else
+                    
+                    if (onCounter)
                     {
                         mode_Monster = Mode.Idle;
                     }
+
                     //player on floor
-                    
                     if (onFloor)
                     {
                         mode_Monster = Mode.Chase;
@@ -343,13 +339,13 @@ public class Monster_Turnbase : MonoBehaviour
                         transform.rotation = Quaternion.identity;
                         transform.Rotate(idleRot,Space.Self);
                     }
-                    else
+                    
+                    if (onCounter)
                     {
-                        mode_Monster = Mode.Partrol;
+                        mode_Monster = Mode.Idle;
                     }
                     
                     //player on floor
-                    
                     if (onFloor)
                     {
                         mode_Monster = Mode.Partrol;
