@@ -193,8 +193,8 @@ public class TurnbaseController : MonoBehaviour
 
     private void updateTrain()
     {
-        int currentNum = playerScript.number;
-        if (train) train.GetComponent<Train>().updateTrain(currentNum - 1);
+        //int currentNum = playerScript.number;
+        if (train) train.GetComponent<Train>().updateTrain();
     }
 
     private void updateLight()

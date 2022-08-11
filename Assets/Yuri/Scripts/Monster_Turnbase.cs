@@ -37,6 +37,8 @@ public class Monster_Turnbase : MonoBehaviour
     public bool onCounter;
     public bool onFloor;
 
+    public bool monsterOnFloor;
+
     #endregion
     #region Behaviors
     public enum Mode
@@ -93,16 +95,14 @@ public class Monster_Turnbase : MonoBehaviour
         curPos = transform.position;
         Debug.Log("start pos: "+ curPos);
 
+        monsterOnFloor = false;
+
         //onDesk = true;
     }
     
     void Update()
     {
-        curPlayerPosXZ.x = player.transform.position.x;
-        curPlayerPosXZ.z = player.transform.position.z;
-        curPlayerPosXZ.y = transform.position.y;
-        
-        Debug.DrawRay(transform.position, transform.forward*15,Color.yellow);
+        updatePlayerPosXZ();
         //Debug.DrawRay();
 
         //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
@@ -258,6 +258,7 @@ public class Monster_Turnbase : MonoBehaviour
                     transform.position = navPoints[0].transform.position;
                     curPos = transform.position;
                     mode_Monster = Mode.Partrol;
+                    updatePlayerPosXZ();
                 }
                 break;
             case Mode.Partrol:
@@ -305,6 +306,13 @@ public class Monster_Turnbase : MonoBehaviour
                     //player on floor
                     if (onFloor)
                     {
+                        if (!monsterOnFloor)
+                        {
+                            setNewPoint();
+                            transform.position = navPoints[0].transform.position;
+                            curPos = transform.position;
+                            updatePlayerPosXZ();
+                        }
                         mode_Monster = Mode.Partrol;
                     }
 
@@ -348,6 +356,13 @@ public class Monster_Turnbase : MonoBehaviour
                     //player on floor
                     if (onFloor)
                     {
+                        if (!monsterOnFloor)
+                        {
+                            setNewPoint();
+                            transform.position = navPoints[0].transform.position;
+                            curPos = transform.position;
+                            updatePlayerPosXZ();
+                        }
                         mode_Monster = Mode.Partrol;
                     }
                 }
@@ -480,6 +495,14 @@ public class Monster_Turnbase : MonoBehaviour
 
     public void PatrolByStep()
     {
+        if (!monsterOnFloor)
+        {
+            LookAtPlayer();
+            monsterOnFloor = true;
+            return;
+        }
+
+
         if (Vector3.Distance(transform.position, curPoint.transform.position) > monsterSpeed)
         {
             transform.LookAt(curPoint.transform.position);
@@ -495,6 +518,7 @@ public class Monster_Turnbase : MonoBehaviour
         }
         //transform.position = navPoints[(int) Random.Range(0,navPoints.Count)].transform.position;
         curPos = transform.position;
+
     }
     
     void setNewPoint()
@@ -578,5 +602,12 @@ public class Monster_Turnbase : MonoBehaviour
         }
     }
     
-    
+    private void updatePlayerPosXZ()
+    {
+        curPlayerPosXZ.x = player.transform.position.x;
+        curPlayerPosXZ.z = player.transform.position.z;
+        curPlayerPosXZ.y = transform.position.y;
+
+        Debug.DrawRay(transform.position, transform.forward * 15, Color.yellow);
+    }
 }
