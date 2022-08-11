@@ -128,7 +128,7 @@ public class roll : MonoBehaviour
 
         }
 
-        if (rb.velocity.magnitude < newFrameOffset && prevSpeed > rb.velocity.magnitude && canNewFrame)
+        if (rb.velocity.magnitude < newFrameOffset && prevSpeed > rb.velocity.magnitude && canNewFrame && rb.velocity.magnitude > 0f)
         {
             // new frame
             Debug.Log("new frame");

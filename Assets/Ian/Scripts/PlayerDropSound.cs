@@ -18,6 +18,7 @@ public class PlayerDropSound : MonoBehaviour
 
     public GameObject rollSoundStuff;
     public GameManager gm;
+    public Monster_Turnbase monster;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +36,13 @@ public class PlayerDropSound : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.2f, surfaceCheck))
         {
             //Debug.Log("hit " + hit.collider.name);
-            if (hit.collider.tag == "standable")
+            if (hit.collider.tag == "ground")
                 currentSurface = hit.collider.gameObject.name;
         }
 
         if (oldName.Equals(currentSurface)) return;
+
+        if (!currentSurface.Equals("Desk")) monster.onDesk = false;
 
         switch (currentSurface)
         {

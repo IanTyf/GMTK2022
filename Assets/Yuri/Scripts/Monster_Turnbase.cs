@@ -31,7 +31,7 @@ public class Monster_Turnbase : MonoBehaviour
 
     #region Level_Desk
 
-    private bool onDesk = true;
+    public bool onDesk = true;
 
     #endregion
     #region Behaviors
@@ -89,6 +89,7 @@ public class Monster_Turnbase : MonoBehaviour
         curPos = transform.position;
         Debug.Log("start pos: "+ curPos);
 
+        onDesk = true;
     }
     
     void Update()
@@ -246,6 +247,13 @@ public class Monster_Turnbase : MonoBehaviour
                 {
                     mode_Monster = Mode.Attention;
                 }
+                if (!onDesk)
+                {
+                    setNewPoint();
+                    transform.position = navPoints[0].transform.position;
+                    curPos = transform.position;
+                    mode_Monster = Mode.Partrol;
+                }
                 break;
             case Mode.Partrol:
                 if (curPlayerExpo)
@@ -256,7 +264,14 @@ public class Monster_Turnbase : MonoBehaviour
             case Mode.Attention:
                 if (curPlayerExpo)
                 {
-                    mode_Monster = Mode.Chase;
+                    if (onDesk)
+                    {
+                        mode_Monster = Mode.Chase;
+                    }
+                    else
+                    {
+                        mode_Monster = Mode.Idle;
+                    }
                 }
                 else
                 {
@@ -277,7 +292,14 @@ public class Monster_Turnbase : MonoBehaviour
             case Mode.Chase:
                 if (curPlayerExpo)
                 {
-                    mode_Monster = Mode.Chase;
+                    if (onDesk)
+                    {
+                        mode_Monster = Mode.Chase;
+                    }
+                    else
+                    {
+                        mode_Monster = Mode.Idle;
+                    }
                 }
                 else
                 {

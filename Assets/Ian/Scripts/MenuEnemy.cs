@@ -34,7 +34,7 @@ public class MenuEnemy : MonoBehaviour
 
     public void Disappear()
     {
-        glitchEffect.glitchForSeconds(0.8f, 0.08f);
+        //glitchEffect.glitchForSeconds(0.8f, 0.08f);
         disableAll();
     }
 

@@ -8369,7 +8369,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0f50a4da7b89a4344866701d6354c600, type: 2}
     - target: {fileID: 919132149155446097, guid: 96678b7642f913840b76964f336a0d83, type: 3}
       propertyPath: m_Name
-      value: floor
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 96678b7642f913840b76964f336a0d83, type: 3}
+      propertyPath: m_TagString
+      value: ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96678b7642f913840b76964f336a0d83, type: 3}
@@ -11232,7 +11236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455818051}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 38.16, y: 9.8, z: 45.44}
+  m_LocalPosition: {x: 28.8, y: 9.8, z: 43.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21038,7 +21042,8 @@ MonoBehaviour:
   monsterChaseSpeed: 2
   KillDist: 1
   CloseDist: 5
-  mode_Monster: 1
+  onDesk: 1
+  mode_Monster: 0
   navPoints:
   - {fileID: 183301884}
   - {fileID: 1721169107}
@@ -33462,6 +33467,7 @@ MonoBehaviour:
   carpetRollSound: {fileID: 8300000, guid: 8237ae9c5c0db2744911bddf38ef163d, type: 3}
   rollSoundStuff: {fileID: 7183286182384577526}
   gm: {fileID: 961412270}
+  monster: {fileID: 828894897}
 --- !u!114 &1324920868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40431,6 +40437,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: efca049d2f7c8d04597cf1da00bc5c84, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -295864755241522855, guid: efca049d2f7c8d04597cf1da00bc5c84, type: 3}
+      propertyPath: m_Name
+      value: Desk
       objectReference: {fileID: 0}
     - target: {fileID: -295864755241522855, guid: efca049d2f7c8d04597cf1da00bc5c84, type: 3}
       propertyPath: m_TagString
