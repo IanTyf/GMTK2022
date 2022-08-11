@@ -33,7 +33,9 @@ public class Monster_Turnbase : MonoBehaviour
 
     #region Level_Desk
 
-    public bool onDesk = true;
+    public bool onDesk;
+    public bool onCounter;
+    public bool onFloor;
 
     #endregion
     #region Behaviors
@@ -78,7 +80,7 @@ public class Monster_Turnbase : MonoBehaviour
     {
         idlePos = transform.position;
         idleRot = transform.rotation.eulerAngles;
-        mode_Monster = Mode.Idle;
+        //mode_Monster = Mode.Idle;
         testingTimer = testingTime;
 
         if (mode_Monster == Mode.Partrol)
@@ -91,7 +93,7 @@ public class Monster_Turnbase : MonoBehaviour
         curPos = transform.position;
         Debug.Log("start pos: "+ curPos);
 
-        onDesk = true;
+        //onDesk = true;
     }
     
     void Update()
@@ -100,8 +102,9 @@ public class Monster_Turnbase : MonoBehaviour
         curPlayerPosXZ.z = player.transform.position.z;
         curPlayerPosXZ.y = transform.position.y;
         
-        Debug.DrawRay(transform.position, transform.forward*100,Color.yellow);
-        
+        Debug.DrawRay(transform.position, transform.forward*15,Color.yellow);
+        //Debug.DrawRay();
+
         //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
     }
 
@@ -249,7 +252,7 @@ public class Monster_Turnbase : MonoBehaviour
                 {
                     mode_Monster = Mode.Attention;
                 }
-                if (!onDesk)
+                if (onFloor)
                 {
                     setNewPoint();
                     transform.position = navPoints[0].transform.position;
@@ -266,6 +269,7 @@ public class Monster_Turnbase : MonoBehaviour
             case Mode.Attention:
                 if (curPlayerExpo)
                 {
+                    //player on desk
                     if (onDesk)
                     {
                         mode_Monster = Mode.Chase;
@@ -273,6 +277,16 @@ public class Monster_Turnbase : MonoBehaviour
                     else
                     {
                         mode_Monster = Mode.Idle;
+                    }
+
+                    //player on floor
+                    if (onFloor)
+                    {
+                        mode_Monster = Mode.Chase;
+                    }
+                    else
+                    {
+                        
                     }
                 }
                 else
@@ -288,12 +302,23 @@ public class Monster_Turnbase : MonoBehaviour
                     {
                         mode_Monster = Mode.Partrol;
                     }
+                    
+                    //player on floor
+                    if (onFloor)
+                    {
+                        mode_Monster = Mode.Partrol;
+                    }
+                    else
+                    {
+                        
+                    }
 
                 }
                 break;
             case Mode.Chase:
                 if (curPlayerExpo)
                 {
+                    //player on desk
                     if (onDesk)
                     {
                         mode_Monster = Mode.Chase;
@@ -301,6 +326,12 @@ public class Monster_Turnbase : MonoBehaviour
                     else
                     {
                         mode_Monster = Mode.Idle;
+                    }
+                    //player on floor
+                    
+                    if (onFloor)
+                    {
+                        mode_Monster = Mode.Chase;
                     }
                 }
                 else
@@ -313,6 +344,13 @@ public class Monster_Turnbase : MonoBehaviour
                         transform.Rotate(idleRot,Space.Self);
                     }
                     else
+                    {
+                        mode_Monster = Mode.Partrol;
+                    }
+                    
+                    //player on floor
+                    
+                    if (onFloor)
                     {
                         mode_Monster = Mode.Partrol;
                     }
@@ -512,11 +550,11 @@ public class Monster_Turnbase : MonoBehaviour
     public bool PatrolDetectPlayer()
     {
         RaycastHit coneHit;
-        if (Physics.Raycast(DetectRay.transform.position, player.transform.position- DetectRay.transform.position, out coneHit, Mathf.Infinity))
+        if (Physics.Raycast(DetectRay.transform.position, player.transform.position- DetectRay.transform.position, out coneHit, 15f))
         {
             //hit 到 夹角<15 >-15
             Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
-            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 30)
+            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 35)
             {
                 if (coneHit.transform.tag == "Player")
                 {
