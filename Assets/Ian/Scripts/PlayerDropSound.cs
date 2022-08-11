@@ -72,7 +72,7 @@ public class PlayerDropSound : MonoBehaviour
         {
             if (currentSurface.Equals("Floor"))
             {
-                audioSource.PlayOneShot(woodDropFromHigh);
+                audioSource.PlayOneShot(woodDropFromHigh, 0.15f);
                 // biss
                 //gm.dieInstantly();
             }
@@ -85,7 +85,7 @@ public class PlayerDropSound : MonoBehaviour
         {
             if (currentSurface.Equals("Floor"))
             {
-                audioSource.PlayOneShot(woodDropFromLow);
+                audioSource.PlayOneShot(woodDropFromLow, 0.15f);
                 // attention
                 rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
             }
@@ -94,7 +94,7 @@ public class PlayerDropSound : MonoBehaviour
         {
             if (currentSurface.Equals("Floor"))
             {
-                audioSource.PlayOneShot(woodDropFromLow);
+                audioSource.PlayOneShot(woodDropFromLow, 0.15f);
                 // attention
                 rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
             }
