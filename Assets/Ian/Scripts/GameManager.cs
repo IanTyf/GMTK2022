@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum CheckPoint
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public EffectsController effectController;
 
     public GameObject overlay;
+    public GameObject endText;
     public AudioSource heartBeat;
 
     private bool glitch;
@@ -40,10 +42,12 @@ public class GameManager : MonoBehaviour
 
     public bool GameStarted;
 
+    public string[] endTextContent;
+
     private void Awake()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
 
         // player dice spawn
         switch (StaticManager.curCheckPoint)
@@ -146,13 +150,21 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void NewDeath()
+    {
+        Invoke("blackScreenAndReload", 3f);
+    }
+
+
     public void blackScreenAndReload()
     {
         //glitchEffect.glitchStrength = 0f;
         heartBeat.volume = 0f;
+        effectController.enabled = false;
         overlay.GetComponent<Animator>().SetTrigger("fadeToBlack");
+        Invoke("showRandomEndText", 1.7f);
 
-        Invoke("ReloadScene", 4f);
+        Invoke("ReloadScene", 7.1f);
     }
 
     public void ReloadScene()
@@ -173,6 +185,12 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("Scene_Lost");
         }
         */
+    }
+
+    private void showRandomEndText()
+    {
+        endText.GetComponent<TMP_Text>().text = endTextContent[Random.Range(0, endTextContent.Length)];
+        endText.GetComponent<Animator>().SetTrigger("showText");
     }
 
     public void blackInFive()
