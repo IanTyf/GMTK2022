@@ -25,6 +25,8 @@ public class Monster_Turnbase : MonoBehaviour
     [SerializeField]
     public float CloseDist = 5f;
 
+    public float KillOffset;
+
     private Vector3 idlePos;
     private Vector3 idleRot;
     #endregion
@@ -349,6 +351,10 @@ public class Monster_Turnbase : MonoBehaviour
         {
             //kill player
             // TODO: manually set monster position
+            //transform.Translate((curPlayerPosXZ - curPos).normalized * (Dist_player_Monster() - KillOffset), Space.World);
+            transform.position = new Vector3(curPlayerPosXZ.x, transform.position.y, curPlayerPosXZ.z) + new Vector3(curPos.x - curPlayerPosXZ.x, 0f, curPos.z - curPlayerPosXZ.z).normalized * KillOffset;
+            LookAtPlayer();
+
             monsterMesh.updateChaseDeadState();
             player.GetComponent<roll>().playerMode = roll.Mode.Dead;
         }
@@ -428,6 +434,11 @@ public class Monster_Turnbase : MonoBehaviour
     public float Dist_player_Monster()
     {
         return Vector3.Distance(transform.position, player.transform.position);
+    }
+
+    public float Dist_player_Monster_XZ()
+    {
+        return Vector3.Distance(transform.position, curPlayerPosXZ);
     }
 
     public void PatrolByStep()
