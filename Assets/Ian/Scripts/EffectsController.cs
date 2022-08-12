@@ -14,6 +14,8 @@ public class EffectsController : MonoBehaviour
 
     public GameManager gm;
 
+    public GameObject mesh;
+
     private bool footStepPlayed;
 
     private float chaseStartDist;
@@ -142,17 +144,22 @@ public class EffectsController : MonoBehaviour
         if (chaseStartDist == -1)
         {
             glitchEffect.glitchStrength = 0f;
+            Color col = mesh.GetComponent<MeshRenderer>().material.color;
+            mesh.GetComponent<MeshRenderer>().material.color = new Color(col.r, col.g, col.b, 1f);
         }
         else
         {
             //if (monster.mode_Monster != Monster_Turnbase.Mode.InReseting)
             //{
-                float dist = monster.Dist_player_Monster();
-                if (dist < monster.KillDist) dist = monster.KillDist;
-                float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
-                glitchEffect.glitchStrength = (1.0f + frac * -1f)*0.6f + 0.2f;
-                
-                startResettingStrength = 0f;
+            float dist = monster.Dist_player_Monster();
+            if (dist < monster.KillDist) dist = monster.KillDist;
+            float frac = (dist - monster.KillDist) / (chaseStartDist - monster.KillDist);
+            glitchEffect.glitchStrength = (1.0f + frac * -1f)*0.6f + 0.2f;
+
+            Color col = mesh.GetComponent<MeshRenderer>().material.color;
+            mesh.GetComponent<MeshRenderer>().material.color = new Color(col.r, col.g, col.b, 1.0f - (1.0f + frac * -1f) * 0.6f);
+
+            startResettingStrength = 0f;
             //}
             /*
             else

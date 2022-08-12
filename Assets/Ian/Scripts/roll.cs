@@ -52,6 +52,7 @@ public class roll : MonoBehaviour
         playerMode = Mode.Idle;
 
         canMove = true;
+        canNewFrame = true;
         camTransform.position = transform.position;
         camTransform.Rotate(new Vector3(0f, transform.rotation.eulerAngles.y, 0f), Space.World);
         //camMovement.InitRot();

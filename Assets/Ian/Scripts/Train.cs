@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Train : MonoBehaviour
 {
+    private int currentInd;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentInd = 0;
+        disableAllTrains();
+        transform.GetChild(currentInd).gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -16,10 +20,12 @@ public class Train : MonoBehaviour
         
     }
 
-    public void updateTrain(int ind)
+    public void updateTrain()
     {
         disableAllTrains();
-        transform.GetChild(ind).gameObject.SetActive(true);
+        currentInd++;
+        if (currentInd >= transform.childCount) currentInd = 0;
+        transform.GetChild(currentInd).gameObject.SetActive(true);
     }
 
     private void disableAllTrains()
