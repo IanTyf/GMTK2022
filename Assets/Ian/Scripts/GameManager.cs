@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
 
         // broken dice spawn
+        /*
         for (int i=0; i<spawnPoints.Length; i++)
         {
             if (i<StaticManager.deathCount)
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
                 Instantiate(normalDice, spawnPoints[i].transform.position, Quaternion.identity);
             }
         }
+        */
     }
 
     // Start is called before the first frame update

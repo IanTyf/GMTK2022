@@ -409,6 +409,7 @@ public class Monster_Turnbase : MonoBehaviour
             monsterMesh.updateChaseDeadState();
             player.GetComponent<roll>().playerMode = roll.Mode.Dead;
             gm.NewDeath();
+            SetOneFrame = false;
         }
     }
 

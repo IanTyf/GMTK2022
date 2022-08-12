@@ -79,7 +79,6 @@ public class TurnbaseController : MonoBehaviour
     {
 
         updatePainting();
-        updateTrain();
         updateLight();
 
         /*
@@ -97,6 +96,8 @@ public class TurnbaseController : MonoBehaviour
 
         if (++monsterMoveCounter > monsterMoveCD)
         {
+            updateTrain();
+            
             UpdateCurPlayerData();
 
             Monster.GetComponent<Monster_Turnbase>().MonsterRound(prePlayerExpo, curPlayerExpo);
