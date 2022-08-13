@@ -575,7 +575,7 @@ public class Monster_Turnbase : MonoBehaviour
         {
             //hit 到 夹角<15 >-15
             Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
-            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 35)
+            if (Vector3.Angle(player.transform.position - transform.position, transform.forward) < 30)
             {
                 if (coneHit.transform.tag == "Player")
                 {
