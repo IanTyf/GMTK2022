@@ -6,6 +6,13 @@ public class PaperUp : MonoBehaviour
 {
     private Animator anim;
 
+    public enum Mode
+    {
+        up, down
+    }
+
+    public Mode direction;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +29,24 @@ public class PaperUp : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Up();
+            if (direction == Mode.up)
+            {
+                Up();
+            }
+            else if (direction == Mode.down)
+            {
+                Down();
+            }
         }
     }
 
     private void Up()
     {
         anim.SetTrigger("Up");
+    }
+
+    private void Down()
+    {
+        anim.SetTrigger("Down");
     }
 }
