@@ -43,6 +43,10 @@ public class roll : MonoBehaviour
 
     public bool movementTestOnly;
 
+    public bool speedUpPerRoll;
+    private float speedUpZDist;
+    private float speedUpTargetZ;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -136,6 +140,14 @@ public class roll : MonoBehaviour
             updateNumber();
             turnbaseController.newTurn();
             canNewFrame = false;
+
+            if (speedUpPerRoll)
+            {
+                //force+=0.2f;
+                Time.timeScale = 1f + 0.5f * (1 - (speedUpTargetZ - transform.position.z) / speedUpZDist);
+                canMove = true;
+                canNewFrame = true;
+            }
         }
 
         if (rb.velocity.magnitude == 0f && prevSpeed > 0)
@@ -186,5 +198,14 @@ public class roll : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void speedUp(float _speedUpZDist, float _speedUpTargetZ)
+    {
+        speedUpZDist = _speedUpZDist;
+        speedUpTargetZ = _speedUpTargetZ;
+
+        speedUpPerRoll = true;
+
     }
 }

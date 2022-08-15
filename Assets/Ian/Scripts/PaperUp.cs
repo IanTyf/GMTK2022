@@ -29,7 +29,7 @@ public class PaperUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        anim.SetFloat("speedMult", 1 / Time.timeScale);
     }
 
     private void OnTriggerEnter(Collider other)
