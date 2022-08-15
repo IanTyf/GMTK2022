@@ -136,7 +136,8 @@ public class Monster_Turnbase : MonoBehaviour
             {
                 //D
                 Debug.Log("Hit Name:"+ RayDetectHit.transform.name);
-                if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
+                if (((RayDetectHit.transform.gameObject.name == "Desk" && !monsterOnFloor)||(RayDetectHit.transform.gameObject.name == "Floor" && monsterOnFloor)) 
+                    &&!SideDetectHit())
                 {
                     Debug.Log("modified move forward successfully");
                     SetOneFrame = false;
@@ -151,7 +152,8 @@ public class Monster_Turnbase : MonoBehaviour
                     transform.Translate(-transform.right*(i+1)*.1f*monsterChaseSpeed,Space.World);
                     if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
                     {
-                        if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
+                        if (((RayDetectHit.transform.gameObject.name == "Desk" && !monsterOnFloor) || (RayDetectHit.transform.gameObject.name == "Floor" && monsterOnFloor))
+                            && !SideDetectHit())
                         {
                             Debug.Log("modified move forward successfully");
                             SetOneFrame = false;
@@ -166,7 +168,8 @@ public class Monster_Turnbase : MonoBehaviour
                             transform.Translate(transform.right*(i+1)*.1f*monsterChaseSpeed,Space.World);
                             if (Physics.Raycast(DetectRay.transform.position, Vector3.down, out RayDetectHit, Mathf.Infinity))
                             {
-                                if (RayDetectHit.transform.tag == "ground"&&!SideDetectHit())
+                                if (((RayDetectHit.transform.gameObject.name == "Desk" && !monsterOnFloor) || (RayDetectHit.transform.gameObject.name == "Floor" && monsterOnFloor))
+                                    && !SideDetectHit())
                                 {
                                     Debug.Log("modified move forward successfully");
                                     SetOneFrame = false;
@@ -453,6 +456,7 @@ public class Monster_Turnbase : MonoBehaviour
         else
         {
             //正常走
+            SetOneFrame = false;
         }
     }
 
