@@ -37,6 +37,11 @@ public class menuCamZoom : MonoBehaviour
             val = val > 1f ? 1f : val;
             float newY = startPos.y + (targetPos.y - startPos.y) * val;
             newPos.y = newY;
+
+            val = Mathf.Pow(zoomVal * 1.0f, 2.5f);
+            val = val > 1f ? 1f : val;
+            float newX = startPos.x + (targetPos.x - startPos.x) * val;
+            newPos.x = newX;
             transform.position = newPos;
 
 
