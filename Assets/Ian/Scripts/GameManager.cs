@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
+        StaticManager.deathCount++;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         /*
         if (StaticManager.deathCount < 5)
