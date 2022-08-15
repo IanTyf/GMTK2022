@@ -13,10 +13,17 @@ public class PaperUp : MonoBehaviour
 
     public Mode direction;
 
+    private bool animPlayed;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        if (direction == Mode.down)
+        {
+            anim.SetTrigger("180Idle");
+        }
     }
 
     // Update is called once per frame
@@ -37,6 +44,8 @@ public class PaperUp : MonoBehaviour
             {
                 Down();
             }
+
+            animPlayed = true;
         }
     }
 
