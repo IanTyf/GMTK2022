@@ -27,8 +27,8 @@ public class Monster_Turnbase : MonoBehaviour
 
     public float KillOffset;
 
-    private Vector3 idlePos;
-    private Vector3 idleRot;
+    public Vector3 idlePos;
+    public Vector3 idleRot;
     #endregion
 
     #region Level_Desk
