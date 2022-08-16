@@ -27,8 +27,8 @@ public class Monster_Turnbase : MonoBehaviour
 
     public float KillOffset;
 
-    private Vector3 idlePos;
-    private Vector3 idleRot;
+    public Vector3 idlePos;
+    public Vector3 idleRot;
     #endregion
 
     #region Level_Desk
@@ -62,6 +62,8 @@ public class Monster_Turnbase : MonoBehaviour
     private float testingTime = 2;
     [SerializeField]
     private float testingTimer = 0;
+
+    public GameObject idlePosTrigger;
     #endregion
 
 
@@ -106,6 +108,8 @@ public class Monster_Turnbase : MonoBehaviour
         //Debug.DrawRay();
 
         //Debug.Log("angle:"+Vector3.Angle(player.transform.position - transform.position, transform.forward));
+        
+        
     }
 
     private void FixedUpdate()
