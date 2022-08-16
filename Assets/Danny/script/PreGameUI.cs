@@ -38,6 +38,6 @@ public class PreGameUI : MonoBehaviour
 
     public void StartSceneLoad() 
     {
-        SceneManager.LoadScene("Scene_Main_TestBuild");
+        SceneManager.LoadScene("Game");
     }
 }
