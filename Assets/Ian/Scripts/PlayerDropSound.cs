@@ -24,6 +24,7 @@ public class PlayerDropSound : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        currentSurface = "Desk";
     }
 
     // Update is called once per frame
@@ -59,21 +60,21 @@ public class PlayerDropSound : MonoBehaviour
                 monster.onFloor = true;
                 break;
             case "Counter":
-                updateVolumeAndPitch(0.8f, 1.24f);
+                updateVolumeAndPitch(0.4f, 1.24f);
                 updateSound(carpetRollSound);
                 monster.onDesk = false;
                 monster.onCounter = true;
                 monster.onFloor = false;
                 break;
             case "Carpet":
-                updateVolumeAndPitch(0.8f, 1.24f);
+                updateVolumeAndPitch(0.4f, 1.24f);
                 updateSound(carpetRollSound);
                 monster.onDesk = false;
                 monster.onCounter = false;
                 monster.onFloor = true;
                 break;
             case "Bed":
-                updateVolumeAndPitch(0.8f, 1.24f);
+                updateVolumeAndPitch(0.4f, 1.24f);
                 updateSound(carpetRollSound);
                 monster.onDesk = false;
                 monster.onCounter = true;
@@ -85,7 +86,8 @@ public class PlayerDropSound : MonoBehaviour
         {
             if (currentSurface.Equals("Floor"))
             {
-                audioSource.PlayOneShot(woodDropFromHigh, 0.15f);
+                audioSource.PlayOneShot(woodDropFromHigh, 0.05f);
+                Debug.Log("played woodDropFromHigh");
                 // biss
                 //gm.dieInstantly();
             }
@@ -98,7 +100,7 @@ public class PlayerDropSound : MonoBehaviour
         {
             if (currentSurface.Equals("Floor"))
             {
-                audioSource.PlayOneShot(woodDropFromLow, 0.15f);
+                audioSource.PlayOneShot(woodDropFromLow, 0.05f);
                 // attention
                 rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
             }
@@ -107,7 +109,7 @@ public class PlayerDropSound : MonoBehaviour
         {
             if (currentSurface.Equals("Floor"))
             {
-                audioSource.PlayOneShot(woodDropFromLow, 0.15f);
+                audioSource.PlayOneShot(woodDropFromLow, 0.05f);
                 // attention
                 rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
             }

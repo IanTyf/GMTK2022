@@ -20,7 +20,7 @@ public class OutsideTrigger : MonoBehaviour
     {
         float playerDist = ec.gameObject.transform.position.z - transform.position.z;
         float totalDist = endPoint.transform.position.z - transform.position.z;
-        if (playerDist / totalDist > 0.85f)
+        if (playerDist / totalDist > 0.7f)
         {
             goodEndingAnim.SetTrigger("goodEnding");
         }
