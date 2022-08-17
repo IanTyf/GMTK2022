@@ -51,14 +51,14 @@ public class DollCollision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "PlayerTrigger")
+        if (other.tag == "Player")
         {
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
                 EyeballLight();
-                rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
-
+                //rollSoundStuff.GetComponent<rollSoundManager>().rollVolumeLevel = rollSoundStuff.GetComponent<rollSoundManager>().tooLoudThreshold + 0.1f;
+                Debug.Log("playing sound");
 
                 // doll eye change color
                 playing = true;
