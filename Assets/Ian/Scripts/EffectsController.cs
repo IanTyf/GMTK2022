@@ -201,5 +201,8 @@ public class EffectsController : MonoBehaviour
         outsideZDist = outsideEndPoint.transform.position.z - transform.position.z;
         startCol = mesh.GetComponent<MeshRenderer>().material.color;
         mesh.transform.parent.gameObject.GetComponent<roll>().speedUp(outsideZDist, outsideEndPoint.transform.position.z);
+        glitchEffect.glitchStrength = 0f;
+        heartBeat.volume = 0.05f;
+        heartBeat.pitch = 0.7f;
     }
 }
