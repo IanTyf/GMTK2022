@@ -137,9 +137,10 @@ public class roll : MonoBehaviour
         {
             // new frame
             Debug.Log("new frame");
-            updateNumber();
-            turnbaseController.newTurn();
             canNewFrame = false;
+            int oldNum = number;
+            updateNumber();
+            if (oldNum != number)   turnbaseController.newTurn();
 
             if (speedUpPerRoll)
             {
