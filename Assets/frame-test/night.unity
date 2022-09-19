@@ -2351,7 +2351,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1007198939
 PrefabInstance:
@@ -2889,7 +2889,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
-  m_Intensity: 0.09
+  m_Intensity: 0.15
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -5253,7 +5253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &1537076204
 MonoBehaviour:
@@ -6763,7 +6763,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1959950832
 PrefabInstance:
@@ -9232,6 +9232,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 254398440}
     m_Modifications:
+    - target: {fileID: 4799728549486774326, guid: 084c9669722d84d4ca49756a5ef0827e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e0fdb0280040ac34aa9783000faf862c, type: 2}
     - target: {fileID: 7136293060341320312, guid: 084c9669722d84d4ca49756a5ef0827e, type: 3}
       propertyPath: m_Name
       value: wall with window
